@@ -1,0 +1,117 @@
+package com.parking.backend.Models;
+
+
+import com.parking.backend.Enum.ROLE;
+import jakarta.persistence.*;
+
+import java.io.Serializable;
+@MappedSuperclass
+public abstract class User implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name="full_name", nullable = true)
+    private  String fullName;
+
+
+    @Column(name = "dni", nullable = true, unique = true)
+    private String dni;
+
+    @Column(name = "phone_number",nullable = true)
+    private String phoneNumber;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role_user", nullable = false)
+    private ROLE roleUser = ROLE.USER; // default value is user
+
+
+
+
+
+    /*
+    *
+    * Campos y Métodos: Los getters y setters en User funcionan correctamente y no
+    *  necesitan ser abstractos. Las subclases como Employee pueden usar estos métodos
+    *  tal como están, sin necesidad de reimplementarlos.
+    * */
+
+
+
+
+    //comstructor
+    public User(){
+
+    }
+
+
+    public User(Long id, String fullName, String dni, String phoneNumber, ROLE roleUser) {
+        this.id = id;
+        this.fullName = fullName;
+        this.dni = dni;
+        this.phoneNumber = phoneNumber;
+        this.roleUser = roleUser;
+    }
+
+    public User(ROLE roleUser) {
+        this.roleUser=roleUser;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String name) {
+        this.fullName = name;
+    }
+
+
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public ROLE getRoleUser() {
+        return roleUser;
+    }
+
+    public void setRoleUser(ROLE roleUser) {
+        this.roleUser=roleUser;
+    }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", dni='" + dni + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", ROLEUser=" + roleUser +
+
+                '}';
+    }
+
+}
+
