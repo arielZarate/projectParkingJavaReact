@@ -2,11 +2,19 @@ package com.parking.backend.Models;
 
 import com.parking.backend.Enum.TYPE_VEHICLE;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @Entity
 @Table(name = "Rate")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Rate implements Serializable {
 
 
@@ -23,44 +31,6 @@ public class Rate implements Serializable {
     private  Double costPerHour;
 
 
-    public Rate(){}
 
-    public Rate(TYPE_VEHICLE typeVehicle, Double costPerHour) {
-
-        this.typeVehicle = typeVehicle;
-        this.costPerHour = costPerHour;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public TYPE_VEHICLE getTypeVehicle() {
-        return typeVehicle;
-    }
-
-    public void setTypeVehicle(TYPE_VEHICLE typeVehicle) {
-        this.typeVehicle = typeVehicle;
-    }
-
-
-    public Double getCostPerHour() {
-        return costPerHour;
-    }
-
-    public void setCostPerHour(Double costPerHour) {
-        this.costPerHour=costPerHour;
-    }
-
-    @Override
-    public String toString() {
-        return "Rate{" +
-                ", typeVehicle=" + typeVehicle +
-                ", CostPerHour=" + costPerHour +
-                '}';
-    }
 }
+

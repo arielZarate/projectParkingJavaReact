@@ -3,6 +3,7 @@ package com.parking.backend.Services;
 import com.parking.backend.Models.Parking;
 import com.parking.backend.Repositories.ParkingRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -40,6 +41,7 @@ class ParkingServiceTest {
 
 
     @Test
+    @DisplayName("Test para traer todos los parking")
     void findAllParking() {
 
         // Arrange

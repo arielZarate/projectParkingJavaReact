@@ -5,11 +5,19 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.parking.backend.Enum.COLOR;
 import com.parking.backend.Enum.TYPE_VEHICLE;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name="Vehicle")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Vehicle {
 
     @Id
@@ -34,7 +42,7 @@ public class Vehicle {
 
 
     // Constructor por defecto
-    public Vehicle() {}
+   // public Vehicle() {}  creado con LOMBOK
 
     // Constructor completo (sin id, ya que se genera automáticamente)
     public Vehicle(TYPE_VEHICLE typeVehicle, String licencePlate, COLOR color,String note) {
@@ -67,66 +75,8 @@ public class Vehicle {
 
 
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
 
-    public TYPE_VEHICLE getTypeVehicle() {
-        return typeVehicle;
-    }
 
-    public void setTypeVehicle(TYPE_VEHICLE typeVehicle) {
-        this.typeVehicle = typeVehicle;
-    }
 
-    public String getLicencePlate() {
-        return licencePlate;
-    }
-
-    public void setLicencePlate(String licencePlate) {
-        this.licencePlate = licencePlate;
-    }
-
-    public COLOR getColor() {
-        return color;
-    }
-
-    public void setColor(COLOR color) {
-        this.color = color;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-  /*
-  *   public List<Parking> getParkings() {
-        return parkings;
-    }
-
-    public void setParkings(List<Parking> parkings) {
-        this.parkings = parkings;
-    }
-  * */
-
-    @Override
-    public String toString() {
-        return "Vehicle{" +
-                "id=" + id +
-                ", typeVehicle=" + typeVehicle +
-                ", licencePlate='" + licencePlate + '\'' +
-                ", color=" + color +
-                ", note='" + note + '\'' +
-            //    ", parkings=" + parkings +
-                '}';
-    }
 }

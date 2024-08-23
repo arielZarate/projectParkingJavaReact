@@ -6,19 +6,19 @@ import com.parking.backend.Models.Vehicle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 
+@Repository
 public interface ParkingRepository extends JpaRepository<Parking,Long > {
 
     Optional<Parking> findByVehicleId(Long vehicleId);
 
 
     // Método para encontrar un parking en progreso
-
-
 
         @Query("SELECT p FROM Parking p JOIN p.vehicle v WHERE LOWER(v.licencePlate) = LOWER(:licencePlate)")
         List<Parking> findByVehicleLicencePlate(@Param("licencePlate") String licencePlate);

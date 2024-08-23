@@ -3,9 +3,16 @@ package com.parking.backend.Models;
 
 import com.parking.backend.Enum.ROLE;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 @MappedSuperclass
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +33,6 @@ public abstract class User implements Serializable {
     private ROLE roleUser = ROLE.USER; // default value is user
 
 
-
-
-
     /*
     *
     * Campos y Métodos: Los getters y setters en User funcionan correctamente y no
@@ -36,10 +40,22 @@ public abstract class User implements Serializable {
     *  tal como están, sin necesidad de reimplementarlos.
     * */
 
+    //sobrecarga
+  // otra constructor que recibe solo un parametro Role
+    public User(ROLE roleUser) {
+        this.roleUser=roleUser;
+    }
+
+}
 
 
 
-    //comstructor
+/*
+
+
+==========en vez de hacer esto usare LOMBOK===================================
+
+ //comstructor
     public User(){
 
     }
@@ -53,9 +69,7 @@ public abstract class User implements Serializable {
         this.roleUser = roleUser;
     }
 
-    public User(ROLE roleUser) {
-        this.roleUser=roleUser;
-    }
+
 
     public Long getId() {
         return id;
@@ -113,5 +127,4 @@ public abstract class User implements Serializable {
                 '}';
     }
 
-}
-
+**/

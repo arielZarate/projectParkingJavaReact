@@ -32,7 +32,6 @@ public class ParkingService {
     @Autowired
     private RateService rateService;
 
-
     @Autowired
     private EmployeeService employeeService;
 
