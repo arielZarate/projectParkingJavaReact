@@ -28,8 +28,6 @@ public class RateService {
     public List<Rate> saveOrUpdateRate(List<Rate> rateList) {
         try{
 
-
-
             //============VALIDACIONES========
             validateRate(rateList);
 

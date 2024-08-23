@@ -87,8 +87,6 @@ class RateServiceTest {
         Rate savedRate2 = savedRates.get(1);
         assertEquals(rate2.getTypeVehicle(), savedRate2.getTypeVehicle(), "El tipo de vehículo debería ser 'Bike'");
 
-
-
         for (Rate elem : savedRates )
         {
             System.out.println("Rate :" + elem);
@@ -98,11 +96,18 @@ class RateServiceTest {
     }
 
 
-    @Test
-    void getRateByTypeVehicle() {
-    }
 
     @Test
     void findAll() {
+
+        List<Rate> listRates=rateService.findAll();
+
+        assertNotNull(listRates,"las tarifas no deben estar en null");
+        for (Rate elem : listRates )
+        {
+            System.out.println("Rate :" + elem);
+        }
+
+
     }
 }
