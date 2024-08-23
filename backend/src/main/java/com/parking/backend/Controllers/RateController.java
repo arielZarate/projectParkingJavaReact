@@ -4,6 +4,7 @@ package com.parking.backend.Controllers;
 import com.parking.backend.Exceptions.CustomException;
 import com.parking.backend.Models.Rate;
 import com.parking.backend.Enum.TYPE_VEHICLE;
+import com.parking.backend.Repositories.RateRepository;
 import com.parking.backend.Services.RateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,9 +24,11 @@ public class RateController {
 
 
 
+
+
     // Crear o actualizar una tarifa
     @PostMapping
-    public ResponseEntity<List<Rate>> createOrUpdateRate(@RequestBody Object rates) {
+    public ResponseEntity<List<Rate>> createOrUpdateRate(@RequestBody List<Rate> rates) {
         List<Rate> savedRate = this.rateService.saveOrUpdateRate(rates);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedRate);
     }

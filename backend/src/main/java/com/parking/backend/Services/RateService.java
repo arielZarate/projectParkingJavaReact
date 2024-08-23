@@ -1,6 +1,7 @@
 package com.parking.backend.Services;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.parking.backend.Exceptions.CustomException;
 import com.parking.backend.Models.Rate;
 import com.parking.backend.Enum.TYPE_VEHICLE;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -22,35 +24,16 @@ public class RateService {
 
     // Crear o actualizar una tarifa
     @org.springframework.transaction.annotation.Transactional
-
     //rates puede recibir tanto un solo Objeto o una lista de tarifas a actualizar con su tipo
-    public List<Rate> saveOrUpdateRate(Object rates) {
+    public List<Rate> saveOrUpdateRate(List<Rate> rateList) {
         try{
-           List<Rate> rateList=new ArrayList<>();
-
-           if(rates instanceof Rate){
-               rateList.add((Rate) rates);//casting
-           }else if(rates instanceof List<?>){
-             for(Object obj :(List<?>)rates)
-             {
-                 if(obj instanceof Rate)
-                 {
-                     rateList.add((Rate)obj);
-                 }
-                 else{
-                     throw new CustomException("El objeto en la lista no es de tipo Rate.");
-                 }
-             }
-
-           }else{
-               throw new CustomException("El objeto proporcionado no es un tipo Rate ni una lista de Rates.");
-           }
 
 
-             //============VALIDACIONES========
+
+            //============VALIDACIONES========
             validateRate(rateList);
 
-          List<Rate> updatedRates = new ArrayList<>();
+          List<Rate> saveupdatedRates = new ArrayList<>();
 
             for (Rate rate : rateList) {
 
@@ -65,14 +48,14 @@ public class RateService {
                         existingRate.setCostPerHour(rate.getCostPerHour());
 
                         // Guardar la tarifa actualizada en la lista
-                        updatedRates.add(rateRepository.save(existingRate));
+                        saveupdatedRates.add(rateRepository.save(existingRate));
 
                     } else{
                     // Si la tarifa no existe, créala
-                   updatedRates.add(rateRepository.save(rate));
+                   saveupdatedRates.add(rateRepository.save(rate));
                 }
             }
-            return updatedRates;
+            return saveupdatedRates;
         } catch (CustomException e) {
             throw e;
         }
@@ -81,6 +64,36 @@ public class RateService {
             throw new RuntimeException( e.getMessage(),e);
         }
     }
+
+
+
+
+          /*
+
+            List<Rate> rateList=new ArrayList<>();
+
+            if(rates instanceof Rate){
+                rateList.add((Rate) rates);//casting
+            }else if(rates instanceof List<?>){
+                for(Object obj :(List<?>)rates)
+                {
+                    if(obj instanceof Map)// Usa Map para deserializar objetos JSON
+                    {
+                        Rate rate = new ObjectMapper().convertValue(obj, Rate.class);
+                        rateList.add((Rate)obj);
+                    }
+                    else{
+                        throw new CustomException("El objeto en la lista no es de tipo Rate.");
+                    }
+                }
+
+            }else{
+                throw new CustomException("El objeto proporcionado no es un tipo Rate ni una lista de Rates.");
+            }
+
+          * */
+
+
 
     // Obtener una tarifa por ID NO ES USUAL QUE SE BUSQUE POR ID MAS QUE NADA POR TYPE DE VEHICULO
     @org.springframework.transaction.annotation.Transactional
