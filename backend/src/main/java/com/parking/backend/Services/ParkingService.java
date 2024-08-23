@@ -23,10 +23,10 @@ import java.util.Optional;
 public class ParkingService {
 
 
- @Autowired
+    @Autowired
     private ParkingRepository parkingRepository;
 
- @Autowired
+    @Autowired
     private  VehicleService vehicleService;
 
     @Autowired
@@ -88,7 +88,7 @@ public class ParkingService {
             //como el vehiculo ya puede haber estado en el parking busco solo aquel que esta en estado IN_PROGRESS
             for (Parking parkings : existingParkings) {
                 if (parkings.getStatus() == STATUS_PARKING.IN_PROGRESS) {
-                    throw new CustomException("El vehículo con matrícula " + vehicle.getLicencePlate() + " ya está en el parking.");
+                    throw new CustomException("El vehículo con matrícula " + vehicle.getLicencePlate().toUpperCase() + " ya está en el parking.");
                 }
             }
 

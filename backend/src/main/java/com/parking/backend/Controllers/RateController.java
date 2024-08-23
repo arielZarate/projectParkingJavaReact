@@ -25,7 +25,7 @@ public class RateController {
 
     // Crear o actualizar una tarifa
     @PostMapping
-    public ResponseEntity<List<Rate>> createOrUpdateRate(@RequestBody List<Rate> rates) {
+    public ResponseEntity<List<Rate>> createOrUpdateRate(@RequestBody Object rates) {
         List<Rate> savedRate = this.rateService.saveOrUpdateRate(rates);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedRate);
     }

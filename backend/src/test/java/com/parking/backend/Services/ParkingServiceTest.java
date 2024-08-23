@@ -1,7 +1,14 @@
 package com.parking.backend.Services;
 
+import com.parking.backend.Enum.COLOR;
+import com.parking.backend.Enum.STATUS_PARKING;
+import com.parking.backend.Enum.TYPE_VEHICLE;
+import com.parking.backend.Models.Employee;
 import com.parking.backend.Models.Parking;
+import com.parking.backend.Models.Rate;
+import com.parking.backend.Models.Vehicle;
 import com.parking.backend.Repositories.ParkingRepository;
+import com.parking.backend.Repositories.VehicleRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,11 +35,25 @@ import static org.junit.jupiter.api.Assertions.*;
 class ParkingServiceTest {
 
 
-    @Autowired
-    private ParkingService parkingService;
-
+    //===========Repositorio=================
     @Autowired
     private ParkingRepository parkingRepository;
+
+    @Autowired
+    private VehicleRepository vehicleRepository;
+
+
+    //========services=================
+    @Autowired
+    private ParkingService parkingService;
+    @Autowired
+    private  VehicleService vehicleService;
+
+    @Autowired
+    private RateService rateService;
+
+    @Autowired
+    private EmployeeService employeeService;
 
    @BeforeEach
     void setUp() {
@@ -62,6 +84,7 @@ class ParkingServiceTest {
     }
 
    @Test
+   @DisplayName("Test para obtener un parking por ID")
     void getParkingById() {
 
        Long id=1L;
@@ -75,6 +98,7 @@ class ParkingServiceTest {
     }
 
     @Test
+    @DisplayName("Test para obtener parkings por matrícula")
     void getParkingByLicencePlate() {
 
         String licencePlate = "RJI730";  // Matrícula que estás buscando
@@ -96,5 +120,29 @@ class ParkingServiceTest {
         // Opcional: Puedes imprimir los resultados para inspección visual
         System.out.println("Parkings encontrados con matrícula " + licencePlate + ": " + listParking);
 
+    }
+
+    @Test
+    @DisplayName("Test para guardar un parking")
+    public void saveParking() {
+
+        // Crear y guardar un vehículo
+        Vehicle vehicle = new Vehicle();
+        vehicle.setLicencePlate("pit011");
+        vehicle.setTypeVehicle(TYPE_VEHICLE.CAR);
+        vehicle.setColor(COLOR.BROWN);
+        vehicle.setNote("Vehiclo con espejo derecho roto");
+
+
+        Parking savedParking=parkingService.saveParking(vehicle,1L);
+
+
+        // Assert
+        assertNotNull(savedParking, "El parking guardado no debería ser nulo");
+        assertNotNull(savedParking.getId(), "El id del parking guardado no debería ser nulo");
+        assertEquals(vehicle.getLicencePlate(), savedParking.getVehicle().getLicencePlate(), "La matrícula del parking debería ser " +vehicle.getLicencePlate());
+        assertEquals(STATUS_PARKING.IN_PROGRESS, savedParking.getStatus(), "El estado del parking debería ser IN_PROGRESS");
+
+        System.out.println("Datos del parking: \n" + savedParking);
     }
 }

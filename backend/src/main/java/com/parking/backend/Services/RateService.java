@@ -22,15 +22,37 @@ public class RateService {
 
     // Crear o actualizar una tarifa
     @org.springframework.transaction.annotation.Transactional
-    public List<Rate> saveOrUpdateRate(List<Rate> rates) {
-        //return rateRepository.save(rate);
+
+    //rates puede recibir tanto un solo Objeto o una lista de tarifas a actualizar con su tipo
+    public List<Rate> saveOrUpdateRate(Object rates) {
         try{
+           List<Rate> rateList=new ArrayList<>();
+
+           if(rates instanceof Rate){
+               rateList.add((Rate) rates);//casting
+           }else if(rates instanceof List<?>){
+             for(Object obj :(List<?>)rates)
+             {
+                 if(obj instanceof Rate)
+                 {
+                     rateList.add((Rate)obj);
+                 }
+                 else{
+                     throw new CustomException("El objeto en la lista no es de tipo Rate.");
+                 }
+             }
+
+           }else{
+               throw new CustomException("El objeto proporcionado no es un tipo Rate ni una lista de Rates.");
+           }
+
+
              //============VALIDACIONES========
-            validateRate(rates);
+            validateRate(rateList);
 
           List<Rate> updatedRates = new ArrayList<>();
 
-            for (Rate rate : rates) {
+            for (Rate rate : rateList) {
 
                 // Buscar la tarifa existente por el tipo de vehículo
                    Optional<Rate> existingRateOpt = rateRepository.findByTypeVehicle(rate.getTypeVehicle());
@@ -121,10 +143,8 @@ public class RateService {
     }
 
 
-
-    private void validateRate(List<Rate> rates) throws  CustomException
-    {
-        for(Rate rate : rates){
+    private void validateRate(List<Rate> rates) throws CustomException {
+        for (Rate rate : rates) {
             // System.out.println("Validando tarifa: " + rate);
             // Verificar que el tipo de vehículo no sea nulo
             // EN REALIDAD NO HARIA FALTA YA QUE ESTE DATO EN EL FRONT ES STATICO
@@ -137,8 +157,6 @@ public class RateService {
             if (rate.getCostPerHour() == null || rate.getCostPerHour() < 0) {
                 throw new CustomException("El costo por hora debe ser un valor positivo.");
             }
-
-
 
 
         }

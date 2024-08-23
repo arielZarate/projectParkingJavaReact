@@ -76,44 +76,92 @@
  - las relaciones entre entidades. Cuando haces esto, debes gestionar manualmente las consultas 
  - y la integridad de las relaciones.
 ```java
+package com.parking.backend.Models;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.parking.backend.Enum.STATUS_PARKING;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
+
 @Entity
 @Table(name = "Parking")
+@Data
+@NoArgsConstructor //constructor sin parametros
+@AllArgsConstructor
+@Builder //patron builder
 public class Parking {
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-
-    @Column(name = "entryTime", nullable = true)
-    private LocalDateTime entryTime;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
 
-    @Column(name = "exitTime", nullable = true)
-    private LocalDateTime exitTime;
+  @Column(name = "entryTime",nullable = true)
+  private LocalDateTime entryTime;
 
 
-   //id vehiculo
-    @Column(name = "vehicle_ID", nullable = false)
-    private Long vehicleID;
-
-    // id user
-    @Column(name = "user_ID", nullable = false)
-    private Long userID;
+  @Column(name = "exitTime",nullable = true)
+  private LocalDateTime exitTime;
 
 
-    @Column(name = "cost", nullable = true) // Costo calculado del estacionamiento
-    private Double cost = 0.0;
+  @ManyToOne(fetch = FetchType.EAGER) //// Un parking está asociado a un solo vehículo
+  @JoinColumn(name = "vehicle", nullable = false)
+  //@JsonBackReference
+  private Vehicle vehicle;
 
 
-    public Parking() {
-    }
-    
-    //sigue el codigo
+  @ManyToOne(fetch = FetchType.EAGER) // Un parking está gestionado por un solo empleado
+  @JoinColumn(name = "employee",nullable = false)
+  private Employee employee;
+
+
+
+  // ===podria haber echo la relacion en Rate definiendo @OneToMany  es lo mismo=======0
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "rate",
+          referencedColumnName = "id",  // esta es la id de la tabla de Rate
+          nullable = false)
+  private Rate rate;
+
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = "status", nullable = false)
+  private STATUS_PARKING status ;
+
+
+  @Column(name = "hours" ,nullable = true)
+  private Long hours;
+
+  @Column(name = "cost", nullable = true) // Costo calculado del estacionamiento
+  private Double cost=0.0;
+
+
+
+
+  public void setEntryTime(LocalDateTime entryTime) {
+
+    //truncatedTo(ChronoUnit.MINUTES):
+    // Este método trunca el LocalDateTime a la precisión más cercana de minutos, eliminando los segundos y milisegundos.
+    this.entryTime = entryTime.truncatedTo(ChronoUnit.MINUTES);
+  }
+
+
+
+  public void setExitTime(LocalDateTime exitTime) {
+    this.exitTime = exitTime.truncatedTo(ChronoUnit.MINUTES);
+  }
+
+
 }
-  
- ```
+
+```
 
  ### ¿Funcionará tu Implementación Actual?
  Tu implementación actual funcionará en términos de guardar y recuperar datos, pero con las siguientes consideraciones:
@@ -295,3 +343,66 @@ public class Parking {
 - Un Employee puede gestionar muchos Parking. Esto representa que un empleado puede haber gestionado varios estacionamientos en diferentes momentos.
   Esta relación es también una relación "uno a muchos" (@ManyToOne desde Parking a Employee y @OneToMany desde Employee a Parking).
 
+
+
+## Uso del Patrón Builder
+ Usando LOMBOK `@Builder`
+ Cuando usas @Builder, Lombok genera un constructor privado y una clase estática Builder que te permite construir instancias de la clase de manera fluida y sin tener que preocuparte por la combinación exacta de parámetros.
+
+Aquí está cómo podrías ajustar tu clase Employee para usar @Builder en lugar de los constructores sobrecargados:
+
+```java
+  package com.parking.backend.Models;
+
+import com.parking.backend.Enum.ROLE;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.*;
+
+import java.io.Serializable;
+
+@Entity
+@Table(name = "Employee")
+@Data
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Employee extends User implements Serializable {
+
+  @Column(name = "email", nullable = false, unique = true)
+  private String email;
+
+  @Column(name = "password", nullable = false)
+  private String password;
+
+  // No necesitas los constructores sobrecargados si usas Builder
+  // Puedes construir un objeto Employee usando el patrón Builder
+}
+
+
+```
+
+### Cómo Usar el Builder
+Para crear una instancia de Employee usando el patrón Builder, usarías el método estático builder() proporcionado por Lombok. Aquí tienes un ejemplo de cómo usarlo:
+
+```java
+  // Usando el patrón Builder para crear una instancia de Employee
+Employee employee = Employee.builder()
+        .id(1L)
+        .fullName("John Doe")
+        .dni("12345678")
+        .phoneNumber("555-1234")
+        .roleUser(ROLE.USER)
+        .email("john.doe@example.com")
+        .password("securepassword")
+        .build();
+
+
+```
+
+## Ventajas del Patrón Builder
+1. Flexibilidad: Puedes construir objetos sin tener que preocuparte por el orden o la combinación de parámetros en el constructor.
+2. Legibilidad: El código es más legible porque cada parámetro se establece explícitamente en una línea separada.
+3. Inmutabilidad: Puedes construir objetos inmutables si haces que todos los campos sean final y proporcionas un constructor que no los modifica después de la construcción.

@@ -79,39 +79,8 @@ public class Parking {
     public void setExitTime(LocalDateTime exitTime) {
         this.exitTime = exitTime.truncatedTo(ChronoUnit.MINUTES);
     }
-
-
-    /*    public void showEntryTime(Parking parking) {
-        LocalDateTime entryTime = parking.getEntryTime();
-        String formattedEntryTime = entryTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-        System.out.println("Tiempo de entrada: " + formattedEntryTime);
-    }*/
-   //=================================================================
-
-
-
-  /*
-
-      public Parking(Long id, LocalDateTime entryTime, LocalDateTime exitTime, Vehicle vehicle, Employee employee, Rate rate, STATUS_PARKING status, Long hours, Double cost) {
-        this.id = id;
-        this.entryTime = entryTime;
-        this.exitTime = exitTime;
-        this.vehicle = vehicle;
-        this.employee = employee;
-        this.rate = rate;
-        this.status = status;
-        this.hours = hours;
-        this.cost = cost;
-    }
-
-
-  * */
-
-
-
-
-
-
+    
+    
 }
 
 
