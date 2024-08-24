@@ -96,7 +96,6 @@ class RateServiceTest {
     }
 
 
-
     @Test
     void findAll() {
 
