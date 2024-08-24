@@ -121,7 +121,7 @@ public class ParkingService {
             parking.setRate(rate);
             parking.setEntryTime(LocalDateTime.now());
             parking.setStatus(STATUS_PARKING.IN_PROGRESS);
-            parking.setHours(0L);
+            parking.setHours(1L);
             parking.setCost(0.0); // Asignar costo inicial si es necesario
 
            return parkingRepository.save(parking);
