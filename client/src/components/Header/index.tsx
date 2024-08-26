@@ -1,10 +1,10 @@
 import Link from "next/link";
 import DarkModeSwitcher from "./DarkModeSwitcher";
-import DropdownMessage from "./DropdownMessage";
-import DropdownNotification from "./DropdownNotification";
+//import DropdownMessage from "./DropdownMessage";
+//import DropdownNotification from "./DropdownNotification";
 import DropdownUser from "./DropdownUser";
 import Image from "next/image";
-
+import { FaSearch } from "react-icons/fa";
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
@@ -60,7 +60,7 @@ const Header = (props: {
             <Image
               width={32}
               height={32}
-              src={"/images/logo/logo-icon.svg"}
+              src={"/images/logo/parking-logo.svg"}
               alt="Logo"
             />
           </Link>
@@ -70,7 +70,50 @@ const Header = (props: {
           <form action="https://formbold.com/s/unique_form_id" method="POST">
             <div className="relative">
               <button className="absolute left-0 top-1/2 -translate-y-1/2">
-                <svg
+                <FaSearch
+                  size={20}
+                  className="fill-body hover:fill-primary dark:fill-bodydark dark:hover:fill-primary"
+                />
+              </button>
+
+              <input
+                type="text"
+                placeholder="Buscar parking"
+                className="w-full bg-transparent pl-9 pr-4 font-medium focus:outline-none xl:w-125"
+              />
+            </div>
+          </form>
+        </div>
+
+        <div className="flex items-center gap-3 2xsm:gap-7">
+          <ul className="flex items-center gap-2 2xsm:gap-4">
+            {/* <!-- Dark Mode Toggler --> */}
+            <DarkModeSwitcher />
+            {/* <!-- Dark Mode Toggler --> */}
+
+            {/* <!-- Notification Menu Area --> */}
+            {/* <DropdownNotification />/}
+            {/* <!-- Notification Menu Area --> */}
+
+            {/* <!-- Chat Notification Area --> */}
+            {/*  <DropdownMessage /> */}
+            {/* <!-- Chat Notification Area --> */}
+          </ul>
+
+          {/* <!-- User Area --> */}
+          <DropdownUser />
+          {/* <!-- User Area --> */}
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
+
+/*
+
+ <svg
                   className="fill-body hover:fill-primary dark:fill-bodydark dark:hover:fill-primary"
                   width="20"
                   height="20"
@@ -91,39 +134,4 @@ const Header = (props: {
                     fill=""
                   />
                 </svg>
-              </button>
-
-              <input
-                type="text"
-                placeholder="Type to search..."
-                className="w-full bg-transparent pl-9 pr-4 font-medium focus:outline-none xl:w-125"
-              />
-            </div>
-          </form>
-        </div>
-
-        <div className="flex items-center gap-3 2xsm:gap-7">
-          <ul className="flex items-center gap-2 2xsm:gap-4">
-            {/* <!-- Dark Mode Toggler --> */}
-            <DarkModeSwitcher />
-            {/* <!-- Dark Mode Toggler --> */}
-
-            {/* <!-- Notification Menu Area --> */}
-            <DropdownNotification />
-            {/* <!-- Notification Menu Area --> */}
-
-            {/* <!-- Chat Notification Area --> */}
-            <DropdownMessage />
-            {/* <!-- Chat Notification Area --> */}
-          </ul>
-
-          {/* <!-- User Area --> */}
-          <DropdownUser />
-          {/* <!-- User Area --> */}
-        </div>
-      </div>
-    </header>
-  );
-};
-
-export default Header;
+*/
