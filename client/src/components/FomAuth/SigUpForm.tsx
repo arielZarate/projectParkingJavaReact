@@ -15,7 +15,7 @@ const SigUpForm = (props: Props) => {
         <div className="flex flex-wrap items-center">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="px-26 py-17.5 text-center">
-              <h2 className="mb-6 text-4xl font-bold text-secondary">
+              <h2 className="mb-6 text-4xl font-bold text-primary">
                 Registrar Empleado
               </h2>
 
@@ -53,7 +53,7 @@ const SigUpForm = (props: Props) => {
                     <input
                       type="text"
                       placeholder="Ingrese su nombre completo"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-secondary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-secondary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-secondary"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -70,7 +70,7 @@ const SigUpForm = (props: Props) => {
                     <input
                       type="email"
                       placeholder="Ingrese su correo"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-secondary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-secondary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-secondary"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -87,7 +87,7 @@ const SigUpForm = (props: Props) => {
                     <input
                       type="password"
                       placeholder="Ingrese su contraseña"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-secondary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-secondary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-secondary"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -104,7 +104,7 @@ const SigUpForm = (props: Props) => {
                     <input
                       type="password"
                       placeholder="Repita la contraseña nuevamente"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-secondary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-secondary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-secondary"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -116,7 +116,7 @@ const SigUpForm = (props: Props) => {
                 <div className="mb-5">
                   <input
                     type="submit"
-                    value="Create account"
+                    value="Crear Cuenta"
                     className="w-full cursor-pointer rounded-lg border border-secondary bg-secondary p-4 font-bold text-white transition hover:bg-opacity-90"
                   />
                 </div>
