@@ -6,9 +6,8 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Parking System Manager",
-  description:
-    "This is Next.js Tables page for TailAdmin - Next.js Tailwind CSS Admin Dashboard Template",
+  title: "Parking",
+  description: "Listado de parking",
 };
 
 const TablesPage = () => {

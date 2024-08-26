@@ -9,6 +9,31 @@ export default function DefaultLayout({
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  //============falta implementar==========================
+
+  /*
+ const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Simular comprobación de sesión
+    const checkAuth = () => {
+      const userLoggedIn = false; // Aquí debes reemplazarlo con la lógica real de autenticación
+      if (!userLoggedIn) {
+        router.push("/auth/signin");
+      } else {
+        setIsLoggedIn(true);
+      }
+    };
+    checkAuth();
+  }, [router]);
+
+  if (!isLoggedIn) {
+    return null; // Muestra nada mientras se verifica la autenticación
+  }
+*/
+
   return (
     <>
       {/* <!-- ===== Page Wrapper Start ===== --> */}

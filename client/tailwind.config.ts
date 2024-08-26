@@ -41,6 +41,7 @@ const config: Config = {
         whiter: "#F5F7FD",
         boxdark: "#24303F",
         "boxdark-2": "#1A222C",
+        sidebarBg: "#3E6B11",
         strokedark: "#2E3A47",
         "form-strokedark": "#3d4d60",
         "form-input": "#1d2a39",

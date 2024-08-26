@@ -1,20 +1,14 @@
-//import ECommerce from "@/components/Dashboard/E-commerce";
-import ECommerce from "@/components/Tables/Tableparkig";
-import { Metadata } from "next";
-import DefaultLayout from "@/components/Layouts/DefaultLayout";
+import SignInForm from "@/components/FomAuth/SignInForm";
 
-export const metadata: Metadata = {
-  title: "Parking Cars",
-  description: "",
-};
-
-export default function Home() {
+export default function Index() {
   return (
     <>
-      <DefaultLayout>
-        {/**aca debe estar el login y si inicio sesion se va al dashboard */}
-        <ECommerce />
-      </DefaultLayout>
+      {/**aca debe estar el login y si inicio sesion se va al dashboard */}
+      {/**aca debe estar el login y si inicio sesion con un contextApi de reactse va al dashboard */}
+
+      <div className="min-w-2xl mx-auto ">
+        <SignInForm />
+      </div>
     </>
   );
 }
