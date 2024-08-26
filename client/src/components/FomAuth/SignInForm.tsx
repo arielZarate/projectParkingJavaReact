@@ -104,7 +104,7 @@ const SignInForm: React.FC = () => {
                       href="/contact"
                       className="ml-1 text-lg  text-primary hover:translate-x-2 hover:font-bold"
                     >
-                      contacto
+                      Soporte
                     </Link>
                   </p>
                 </div>

@@ -12,12 +12,18 @@ import {
   FaArrowAltCircleRight,
   FaCar,
   FaChartPie,
+  FaFileContract,
+  FaHeadset,
+  FaInfo,
+  FaInfoCircle,
   FaLongArrowAltLeft,
   FaUser,
+  FaUserShield,
 } from "react-icons/fa";
 import { FaTableList } from "react-icons/fa6";
 import { IoSettings } from "react-icons/io5";
 import { MdLogin } from "react-icons/md";
+import { AiOutlineAim, AiOutlineUser } from "react-icons/ai";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -57,6 +63,12 @@ const menuGroups = [
         route: "/tables",
       },
 
+      {
+        icon: <FaFileContract />,
+        label: "Contratos",
+        route: "/contract",
+      },
+
       /*
       {
         icon: <FaUserShield size={18} />,
@@ -73,49 +85,34 @@ const menuGroups = [
         children: [
           { label: "Perfil", route: "/profile" },
           { label: "Cuenta", route: "/settings" },
-          { label: "Contacto", route: "/contact" },
         ],
       },
 
       {
         icon: <FaUser size={18} color="white" />,
-        label: "Cerrar Sesion",
+        label: "Salir",
         route: "/",
       },
-
-      /**  {
-        icon: <FaWpforms />,
-        label: "UI Elements",
-        route: "#",
-        children: [
-          { label: "Alerts", route: "/ui/alerts" },
-          { label: "Buttons", route: "/ui/buttons" },
-        ],
-      }, */
-
-      /*      {
-        icon: <FaTableList size={18} />,
-        label: "Forms",
-        route: "#",
-        children: [
-          { label: "Form Elements", route: "/forms/form-elements" },
-          { label: "Form Layout", route: "/forms/form-layout" },
-        ],
-      }, */
     ],
   },
   {
     name: "OTROS",
     menuItems: [
       {
-        icon: <FaChartPie size={20} />,
-        label: "Chart",
-        route: "/chart",
+        icon: <FaHeadset size={20} />,
+        label: "Soporte",
+        route: "/contact",
       },
 
       {
-        icon: <MdLogin size={20} />,
-        label: "Authentication",
+        icon: <FaInfoCircle size={20} />,
+        label: "Acerca de",
+        route: "/about",
+      },
+
+      {
+        icon: <FaUserShield size={20} />,
+        label: "Administrador",
         route: "#",
         children: [
           { label: "Iniciar Sesion", route: "/auth/signin" },
