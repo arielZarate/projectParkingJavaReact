@@ -12,21 +12,22 @@ export const TYPE_VEHICLE = {
   // Otros tipos...
 };
 
-
-import React, { useState } from 'react';
-import { STATUS_PARKING } from './enums';
+import React, { useState } from "react";
+//import { STATUS_PARKING } from './enums';
 
 function ParkingStatusSelector() {
-  const [selectedStatus, setSelectedStatus] = useState(STATUS_PARKING.IN_PROGRESS);
+  const [selectedStatus, setSelectedStatus] = useState(
+    STATUS_PARKING.IN_PROGRESS,
+  );
 
-  const handleStatusChange = (event) => {
+  const handleStatusChange = (event: any) => {
     setSelectedStatus(event.target.value);
   };
 
   const sendStatusToBackend = async () => {
     try {
       const response = await fetch(`/api/parking/status/${selectedStatus}`, {
-        method: 'GET',
+        method: "GET",
       });
       const data = await response.json();
       console.log(data);

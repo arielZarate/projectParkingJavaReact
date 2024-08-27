@@ -1,28 +1,31 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 function ParkingForm() {
-  const [vehicleType, setVehicleType] = useState('');
-  const [licencePlate, setLicencePlate] = useState('');
-  const [color, setColor] = useState('');
-  const [note, setNote] = useState('');
-  const [employeeId] = useState(localStorage.getItem('employeeId')); // O sessionStorage
+  const [vehicleType, setVehicleType] = useState("");
+  const [licencePlate, setLicencePlate] = useState("");
+  const [color, setColor] = useState("");
+  const [note, setNote] = useState("");
+  const [employeeId] = useState(localStorage.getItem("employeeId")); // O sessionStorage
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     const vehicleData = {
       typeVehicle: vehicleType,
       licencePlate: licencePlate,
       color: color,
-      note: note
+      note: note,
     };
 
     try {
-      const response = await axios.post(`/api/parking/save/${employeeId}`, vehicleData);
-      console.log('Parking creado:', response.data);
+      const response = await axios.post(
+        `/api/parking/save/${employeeId}`,
+        vehicleData,
+      );
+      console.log("Parking creado:", response.data);
     } catch (error) {
-      console.error('Error creando parking:', error);
+      console.error("Error creando parking:", error);
     }
   };
 
