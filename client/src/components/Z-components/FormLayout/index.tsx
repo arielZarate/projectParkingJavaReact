@@ -1,18 +1,10 @@
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import DefaultLayout from "@/components/Layouts/DefaultLayout";
+import React from "react";
 import Link from "next/link";
-import { Metadata } from "next";
-export const metadata: Metadata = {
-  title: "Next.js Form Layout | TailAdmin - Next.js Dashboard Template",
-  description:
-    "This is Next.js Form Layout page for TailAdmin - Next.js Tailwind CSS Admin Dashboard Template",
-};
+type Props = {};
 
-const FormLayout = () => {
+const FormLayout = (props: Props) => {
   return (
-    <DefaultLayout>
-      <Breadcrumb pageName="FormLayout" />
-
+    <div>
       <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
         <div className="flex flex-col gap-9">
           {/* <!-- Contact Form --> */}
@@ -230,7 +222,7 @@ const FormLayout = () => {
           </div>
         </div>
       </div>
-    </DefaultLayout>
+    </div>
   );
 };
 

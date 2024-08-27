@@ -5,7 +5,8 @@ import "@/css/satoshi.css";
 import "@/css/style.css";
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
-export default function RootLayout({
+
+function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -30,3 +31,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+export default RootLayout;

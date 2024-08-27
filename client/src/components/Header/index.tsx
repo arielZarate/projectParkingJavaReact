@@ -62,10 +62,12 @@ const Header = (props: {
               height={32}
               src={"/images/logo/logo.svg"}
               alt="Logo"
+              className="h-8 w-8 object-contain"
             />
           </Link>
         </div>
 
+        {/*searchBar */}
         <div className="hidden sm:block">
           <form action="https://formbold.com/s/unique_form_id" method="POST">
             <div className="relative">

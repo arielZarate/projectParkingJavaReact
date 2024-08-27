@@ -2,6 +2,16 @@ import Link from "next/link";
 import React from "react";
 
 type Props = {};
+//===============METADATA=======================
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Parking", // Título general
+  description: "Soporte de pagina de parking",
+};
+
+//===================================
 
 const Contact = (props: Props) => {
   return (

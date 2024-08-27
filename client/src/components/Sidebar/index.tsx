@@ -43,7 +43,7 @@ const menuGroups = [
           </div>
         ),
         label: "Ingreso Vehiculo",
-        route: "/forms/form-elements",
+        route: "/vehicle/entry",
       },
 
       {
@@ -54,7 +54,7 @@ const menuGroups = [
           </div>
         ),
         label: "Salida Vehiculo",
-        route: "/forms/form-layout",
+        route: "/vehicle/exit",
       },
 
       {
@@ -131,7 +131,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <ClickOutside onClick={() => setSidebarOpen(false)}>
       <aside
-        className={`overflow-y-hidde bg-sidebarBgSky fixed left-0 top-0 z-9999 flex h-screen w-72.5 flex-col duration-300 ease-linear dark:bg-boxdark lg:translate-x-0 ${
+        className={`overflow-y-hidde dark:bg-SidebarDark fixed left-0 top-0 z-9999 flex h-screen w-72.5 flex-col bg-sidebarBgSky duration-300 ease-linear lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -139,11 +139,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
           <Link href="/home">
             <Image
-              width={80}
-              height={20}
               src={"/images/logo/logo.svg"}
+              width={"140"}
+              height={"30"}
               alt="Logo"
               priority
+              className="object-contain object-center"
             />
           </Link>
 

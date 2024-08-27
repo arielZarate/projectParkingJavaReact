@@ -1,5 +1,4 @@
 "use client";
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 
 import CheckboxFour from "@/components/Z-components/Checkboxes/CheckboxFour";
 
@@ -13,8 +12,6 @@ import MultiSelect from "@/components/Z-components/MultiSelect";
 const FormElements = () => {
   return (
     <>
-      <Breadcrumb pageName="FormElements" />
-
       <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
         <div className="flex flex-col gap-9">
           {/* <!-- Input Fields --> */}

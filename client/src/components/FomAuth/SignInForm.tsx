@@ -7,7 +7,7 @@ import { CiLock } from "react-icons/ci";
 const SignInForm: React.FC = () => {
   return (
     <>
-      <div className="mx-auto max-w-6xl rounded-sm border border-stroke bg-white  shadow-default dark:border-strokedark dark:bg-boxdark md:my-10">
+      <div className="mx-auto  max-w-6xl rounded-sm border border-stroke bg-white  shadow-default dark:border-strokedark dark:bg-boxdark md:my-10">
         <div className="flex flex-wrap items-center">
           <div className="hidden h-full  bg-slate-800  md:w-1/2  xl:block xl:w-1/2  ">
             <div className="px-26 py-17.5 text-center">

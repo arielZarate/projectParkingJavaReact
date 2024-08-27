@@ -1,3 +1,4 @@
+import Sidebar from "@/components/Sidebar";
 import type { Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
 
@@ -40,9 +41,11 @@ const config: Config = {
         "gray-3": "#FAFAFA",
         whiten: "#F1F5F9",
         whiter: "#F5F7FD",
+
         boxdark: "#24303F",
         "boxdark-2": "#1A222C",
         sidebarBgSky: "#0C4A6E", // "#1A2E05", //"#365314", //"#0C4A6E", //"#082F49",
+        SidebarDark: "#1E293B",
         skyDark: "#0369A1",
         strokedark: "#2E3A47",
         "form-strokedark": "#3d4d60",

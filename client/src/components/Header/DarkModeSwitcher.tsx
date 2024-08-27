@@ -1,3 +1,5 @@
+"use client";
+
 import useColorMode from "@/hooks/useColorMode";
 import { FaMoon } from "react-icons/fa";
 import { GoSun } from "react-icons/go";
@@ -5,7 +7,7 @@ const DarkModeSwitcher = () => {
   const [colorMode, setColorMode] = useColorMode();
 
   return (
-    <li>
+    <li className="list-none">
       <label
         className={`relative m-0 block h-7.5 w-14 rounded-full ${
           colorMode === "dark" ? "bg-primary" : "bg-stroke"
