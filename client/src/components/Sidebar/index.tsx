@@ -7,23 +7,23 @@ import Image from "next/image";
 import SidebarItem from "@/components/Sidebar/SidebarItem";
 import ClickOutside from "@/components/ClickOutside";
 import useLocalStorage from "@/hooks/useLocalStorage";
+
+//===============REACT-ICONS===================
 import {
   FaArrowAltCircleLeft,
   FaArrowAltCircleRight,
   FaCar,
-  FaChartPie,
   FaFileContract,
   FaHeadset,
-  FaInfo,
   FaInfoCircle,
   FaLongArrowAltLeft,
-  FaUser,
   FaUserShield,
 } from "react-icons/fa";
 import { FaTableList } from "react-icons/fa6";
 import { IoSettings } from "react-icons/io5";
 import { MdLogin } from "react-icons/md";
-import { AiOutlineAim, AiOutlineUser } from "react-icons/ai";
+
+//================================================
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -64,7 +64,7 @@ const menuGroups = [
       },
 
       {
-        icon: <FaFileContract />,
+        icon: <FaFileContract size={18} />,
         label: "Contratos",
         route: "/contract",
       },
@@ -89,7 +89,7 @@ const menuGroups = [
       },
 
       {
-        icon: <FaUser size={18} color="white" />,
+        icon: <MdLogin size={20} color="white" />,
         label: "Salir",
         route: "/",
       },
