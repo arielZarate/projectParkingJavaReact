@@ -33,7 +33,7 @@ const EntryVehicleForm = (props: Props) => {
                           type="text"
                           name="licencePlate"
                           id="licencePlate"
-                          className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-2 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter  dark:bg-form-input dark:text-white dark:focus:border-primary"
+                          className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-2 text-slate-700 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter  dark:bg-form-input dark:text-white dark:focus:border-primary"
                           placeholder="AXXX-XXX"
                         />
                       </div>
@@ -48,7 +48,7 @@ const EntryVehicleForm = (props: Props) => {
 
                         <div className="flex gap-x-0.5 rounded-lg border-[1.5px] border-stroke bg-transparent p-1 dark:border-form-strokedark">
                           <div className="mr-0.5">
-                            <label className="bg-gray-100 text-gray-700 my-1 flex cursor-pointer rounded-md px-1 py-1 hover:bg-slate-200 dark:hover:bg-graydark">
+                            <label className="bg-gray-100 my-1 flex cursor-pointer rounded-md px-1 py-1 text-slate-700 hover:bg-slate-200 dark:hover:bg-graydark">
                               <input
                                 type="radio"
                                 name="typeVehicle"
@@ -57,7 +57,7 @@ const EntryVehicleForm = (props: Props) => {
                               />
                               <i className="pl-1">Auto</i>
                             </label>
-                            <label className="bg-gray-100 text-gray-700 my-1 flex cursor-pointer rounded-md px-1 py-1 hover:bg-slate-200 dark:hover:bg-graydark">
+                            <label className="bg-gray-100 my-1 flex cursor-pointer rounded-md px-1 py-1 text-slate-700 hover:bg-slate-200 dark:hover:bg-graydark">
                               <input
                                 type="radio"
                                 name="typeVehicle"
@@ -68,7 +68,7 @@ const EntryVehicleForm = (props: Props) => {
                             </label>
                           </div>
                           <div>
-                            <label className="bg-gray-100 text-gray-700 my-1 flex cursor-pointer rounded-md py-1 hover:bg-slate-200 dark:hover:bg-graydark ">
+                            <label className="bg-gray-100 my-1 flex cursor-pointer rounded-md py-1 text-slate-700 hover:bg-slate-200 dark:hover:bg-graydark ">
                               <input
                                 type="radio"
                                 name="typeVehicle"
@@ -78,7 +78,7 @@ const EntryVehicleForm = (props: Props) => {
                               <i className="pl-1">Bicicleta</i>
                             </label>
 
-                            <label className="bg-gray-100 text-gray-700 my-1 flex cursor-pointer rounded-md py-1 hover:bg-slate-200 dark:hover:bg-graydark ">
+                            <label className="bg-gray-100 my-1 flex cursor-pointer rounded-md py-1 text-slate-700 hover:bg-slate-200 dark:hover:bg-graydark ">
                               <input
                                 type="radio"
                                 name="typeVehicle"
@@ -107,7 +107,7 @@ const EntryVehicleForm = (props: Props) => {
                         <select
                           name="color"
                           id="color"
-                          className="w-52 rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-2 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary   lg:w-100"
+                          className="w-52 rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-2 text-slate-600 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary   lg:w-100"
                         >
                           <option value="" disabled selected>
                             Elija color de vehículo
@@ -135,7 +135,7 @@ const EntryVehicleForm = (props: Props) => {
                           name="note"
                           rows={3}
                           placeholder="Ingrese una descripción si es necesario"
-                          className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                          className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-slate-700 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                         ></textarea>
                       </div>
                     </div>
