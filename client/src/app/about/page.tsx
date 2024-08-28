@@ -26,11 +26,11 @@ const AcercaDe = (props: Props) => {
 
             <main className="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
               <div className="sm:text-center lg:text-left">
-                <h2 className="text-gray-900 my-6 text-2xl font-extrabold tracking-tight sm:text-3xl md:text-4xl">
+                <h2 className="my-6 text-2xl font-extrabold tracking-tight text-slate-500 sm:text-3xl md:text-4xl">
                   Parking Management System (PMS)
                 </h2>
 
-                <p>
+                <p className="text-slate-500">
                   El Parking Management System (PMS) es una solución integral
                   diseñada para optimizar la gestión de estacionamientos,
                   facilitando la administración de la entrada y salida de

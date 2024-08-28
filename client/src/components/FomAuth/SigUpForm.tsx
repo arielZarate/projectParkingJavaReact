@@ -15,8 +15,8 @@ const SigUpForm = (props: Props) => {
         <div className="flex flex-wrap items-center">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="px-26 py-17.5 text-center">
-              <h2 className="mb-6 text-4xl font-bold text-primary">
-                Registrar Empleado
+              <h2 className="mb-6  text-5xl font-bold  hover:text-secondary ">
+                Sistema de Parking
               </h2>
 
               <Link className="mb-5.5 inline-block" href="/">

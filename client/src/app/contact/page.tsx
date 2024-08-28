@@ -5,6 +5,9 @@ type Props = {};
 //===============METADATA=======================
 
 import { Metadata } from "next";
+import DefaultLayout from "@/components/Layouts/DefaultLayout";
+import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
+import ContactForm from "@/components/Contact/ContactForm";
 
 export const metadata: Metadata = {
   title: "Parking", // Título general
@@ -15,22 +18,10 @@ export const metadata: Metadata = {
 
 const Contact = (props: Props) => {
   return (
-    <div className="min-w-2xl  mx-auto min-h-screen  bg-slate-700 ">
-      <div className="p-7 text-center">
-        <h1 className=" text-white">
-          Contactese con la administracion de parking
-        </h1>
-
-        <Link href={"/"}>
-          <button
-            type="button"
-            className=" rounded-md border p-[1px] text-sm text-white hover:text-primary"
-          >
-            volver
-          </button>
-        </Link>
-      </div>
-    </div>
+    <DefaultLayout>
+      <Breadcrumb pageName="Soporte Tecnico" />
+      <ContactForm />
+    </DefaultLayout>
   );
 };
 export default Contact;

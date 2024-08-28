@@ -11,10 +11,12 @@ const SignInForm: React.FC = () => {
         <div className="flex flex-wrap items-center">
           <div className="hidden h-full  bg-slate-800  md:w-1/2  xl:block xl:w-1/2  ">
             <div className="px-26 py-17.5 text-center">
-              <h2 className="mb-2 text-4xl font-bold text-primary">
+              {/*  <h2 className="mb-2 text-4xl font-bold text-primary">
                 Inicio de Sesión
-              </h2>
-              <h3 className="text-3xl font-medium text-secondary">Parking</h3>
+              </h2> */}
+              <h1 className=" text-5xl font-semibold  hover:text-secondary">
+                Sistema de Parking
+              </h1>
 
               <Link className="mb-5.5 inline-block" href="/">
                 <Image
@@ -38,7 +40,7 @@ const SignInForm: React.FC = () => {
           <div className="mx-auto border-stroke dark:border-strokedark  sm:w-9/12 xl:w-1/2 xl:border-l-2">
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Login
+                Inicio de Sesión
               </h2>
 
               <form>
