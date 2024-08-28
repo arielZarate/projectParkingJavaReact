@@ -7,12 +7,15 @@ export const fetchParkings = async (): Promise<any> => {
   try {
     const response = await axios.get<Parking[]>("/api/parking");
     const data = response.data;
-    console.log("datos", JSON.stringify(data));
-    //return response;
+    //console.log("datos", JSON.stringify(data));
+    return data;
   } catch (error) {
     throw new Error("Ha fallado el fetch de parkings");
   }
 };
+
+/*
+
 
 export const data = [
   {
@@ -335,3 +338,4 @@ export const data = [
     cost: 0.0,
   },
 ];
+*/
