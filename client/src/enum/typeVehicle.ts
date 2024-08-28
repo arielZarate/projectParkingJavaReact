@@ -1,0 +1,6 @@
+export enum TYPE_VEHICLE {
+  CAR = "CAR",
+  MOTORCYCLE = "MOTORCYCLE",
+  TRUCK = "TRUCK",
+  BICYCLE = "BICYCLE",
+}

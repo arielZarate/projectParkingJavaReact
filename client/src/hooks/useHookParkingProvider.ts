@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { fetchParkings } from "@/services/parkingService";
+import { fetchParkings, data } from "@/services/parkingService";
 import { Parking } from "@/types/parking";
 
 //TODO: hook para descentralizar la logica del Provider de parking
@@ -12,7 +12,14 @@ export const useHookParkingProvider = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetchParkings()
+    // setParkings(data);
+
+    setTimeout(() => {
+      setParkings(data);
+
+      setLoading(false);
+    }, 1000);
+    /** fetchParkings()
       .then((response) => {
         //  console.log("data", response);
         setParkings(response);
@@ -20,10 +27,10 @@ export const useHookParkingProvider = () => {
       })
       .catch((error) => {
         console.error("Error fetching parkings", error);
-      });
+      }); */
   }, []);
 
-  //  console.log("Loading parkings...", parkings);
+  // console.log("Loading parkings...", parkings);
 
   return {
     parkings,

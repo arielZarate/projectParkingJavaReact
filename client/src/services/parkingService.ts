@@ -14,9 +14,6 @@ export const fetchParkings = async (): Promise<any> => {
   }
 };
 
-/*
-
-
 export const data = [
   {
     id: 1,
@@ -338,4 +335,3 @@ export const data = [
     cost: 0.0,
   },
 ];
-*/
