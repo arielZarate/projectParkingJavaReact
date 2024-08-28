@@ -13,6 +13,7 @@ import {
   FaArrowAltCircleLeft,
   FaArrowAltCircleRight,
   FaCar,
+  FaChartPie,
   FaFileContract,
   FaHeadset,
   FaInfoCircle,
@@ -89,6 +90,12 @@ const menuGroups = [
       },
 
       {
+        icon: <FaChartPie size={18} color="white" />,
+        label: "Reportes",
+        route: "/chart",
+      },
+
+      {
         icon: <MdLogin size={20} color="white" />,
         label: "Salir",
         route: "/",
@@ -131,7 +138,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <ClickOutside onClick={() => setSidebarOpen(false)}>
       <aside
-        className={`overflow-y-hidde dark:bg-SidebarDark fixed left-0 top-0 z-9999 flex h-screen w-72.5 flex-col bg-sidebarBgSky duration-300 ease-linear lg:translate-x-0 ${
+        className={`overflow-y-hidde fixed left-0 top-0 z-9999 flex h-screen w-72.5 flex-col bg-sidebarBgSky duration-300 ease-linear dark:bg-SidebarDark lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >

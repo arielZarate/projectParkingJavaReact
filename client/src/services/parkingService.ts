@@ -10,7 +10,7 @@ export const fetchParkings = async (): Promise<any> => {
     console.log("datos", JSON.stringify(data));
     //return response;
   } catch (error) {
-    throw new Error("Failed to fetch parkings");
+    throw new Error("Ha fallado el fetch de parkings");
   }
 };
 
@@ -157,8 +157,8 @@ export const data = [
       costPerHour: 40.0,
     },
     status: "COMPLETED",
-    hours: 0,
-    cost: 40.0,
+    hours: 4,
+    cost: 120.0,
   },
   {
     id: 6,
