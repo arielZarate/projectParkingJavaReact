@@ -3,7 +3,7 @@
 import React, { useContext } from "react";
 
 import { ParkingContext } from "@/context/ParkingContext";
-import { ParkingContextType } from "@/interfaces/parkingContextType";
+import { ParkingContextType } from "@/interfaces/IParkingContextType";
 
 // Hook para usar el contexto de Parking con validación
 export const useHookParkingContext = (): ParkingContextType => {

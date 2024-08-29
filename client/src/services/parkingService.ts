@@ -1,9 +1,12 @@
 // services/parkingService.ts
 
 import axios from "@/config/axiosConfig";
+import { ISaveParkingProp } from "@/interfaces/ISaveParkingProp";
 import { Parking } from "@/types/parking";
 
-export const fetchParkings = async (): Promise<any> => {
+
+
+export const fetchParkings = async (): Promise<Parking[]> => {
   try {
     const response = await axios.get<Parking[]>("/api/parking");
     const data = response.data;
@@ -14,6 +17,34 @@ export const fetchParkings = async (): Promise<any> => {
   }
 };
 
+//===========================================
+//debo importar el id del empleado cuando este logueado
+const employeeId=1;
+//========================================
+
+
+export const postParkings = async (parking:ISaveParkingProp): Promise<Parking | undefined> => {
+  try {
+    const response = await axios.post<Parking>(`/api/parking/save/${employeeId}`, parking);
+    //console.log("response\n",response)
+    return response.data;
+  } catch (error) {
+
+    if(error instanceof Error)
+    throw new Error(error.message ||"Ha fallado la creacion del parking");
+  }
+};
+
+
+
+
+
+
+
+
+
+
+//==============datos harckodeados============
 export const data = [
   {
     id: 1,

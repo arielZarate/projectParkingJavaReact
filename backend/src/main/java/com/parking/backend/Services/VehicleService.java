@@ -1,25 +1,18 @@
 package com.parking.backend.Services;
 
 
-import com.parking.backend.Enum.STATUS_PARKING;
-import com.parking.backend.Enum.TYPE_VEHICLE;
-import com.parking.backend.Exceptions.CustomException;
-import com.parking.backend.Models.Parking;
-import com.parking.backend.Models.Rate;
-import com.parking.backend.Models.Vehicle;
-import com.parking.backend.Repositories.VehicleRepository;
-import com.parking.backend.Utils.LicencePlateGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.parking.backend.Enum.TYPE_VEHICLE;
+import com.parking.backend.Exceptions.CustomException;
+import com.parking.backend.Models.Vehicle;
+import com.parking.backend.Repositories.VehicleRepository;
+import com.parking.backend.Utils.LicencePlateGenerator;
 
 @Service
 public class VehicleService {

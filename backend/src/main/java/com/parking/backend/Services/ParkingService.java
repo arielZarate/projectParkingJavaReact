@@ -1,6 +1,14 @@
 package com.parking.backend.Services;
 
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.parking.backend.Enum.STATUS_PARKING;
 import com.parking.backend.Exceptions.CustomException;
 import com.parking.backend.Models.Employee;
@@ -8,15 +16,6 @@ import com.parking.backend.Models.Parking;
 import com.parking.backend.Models.Rate;
 import com.parking.backend.Models.Vehicle;
 import com.parking.backend.Repositories.ParkingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 

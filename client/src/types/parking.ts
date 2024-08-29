@@ -1,6 +1,8 @@
+
 import { Employee } from "./employee";
 import { Rate } from "./rate";
 import { Vehicle } from "./vehicle";
+
 
 export type Parking = {
   id: number;
@@ -13,3 +15,5 @@ export type Parking = {
   hours: number;
   cost: number;
 };
+
+

@@ -1,12 +1,81 @@
-import React from "react";
+"use client";
 
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { TYPE_VEHICLE } from "@/enum/typeVehicle";
 import { Color } from "@/enum/colorVehicle";
-interface Props {}
+import { ISaveParkingProp } from "@/interfaces/ISaveParkingProp";
+import { postParkings } from "@/services/parkingService";
+import useToast from "../ToastMessage/useToast";
+const EntryVehicleForm = () => {
+  //useState
+  const [typeVehicle, setTypeVehicle] = useState<string>("");
+  //==============hook de toast=============
+  const { setToast, toast, ToastMessage, handleCloseToast } = useToast();
+  //=======REACT HOOK FORM==============================
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue, // Añadido para actualizar el valor del campo
+  } = useForm<ISaveParkingProp>();
 
-const EntryVehicleForm = (props: Props) => {
+  //===========funcion saveParking==================
+  const saveParking = async (data: ISaveParkingProp) => {
+    // Validar que la licencia tenga no más de 4 letras y 4 números
+    const licencePlate = data.licencePlate || "";
+    const letters = licencePlate.replace(/[^A-Za-z]/g, "").length;
+    const numbers = licencePlate.replace(/[^0-9]/g, "").length;
+
+    if (letters > 4 || numbers > 4) {
+      setToast({
+        message: "La patente no puede tener más de 4 letras o 4 números",
+        type: "error",
+      });
+      return;
+    }
+
+    try {
+      //console.log("antes de enviar los datos", data);
+      const res = await postParkings(data);
+
+      if (res != undefined || res != null) {
+        setToast({ message: "Parking creado con éxito", type: "success" });
+      }
+    } catch (error) {
+      console.error(error);
+      if (error instanceof Error) {
+        setToast({
+          message: error.message || "Error al crear el parking",
+          type: "error",
+        });
+      }
+    }
+  };
+
+  // Función para convertir el texto a mayúsculas antes de enviarlo
+  const handleLicencePlateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toUpperCase(); // Convierte a mayúsculas
+    setValue("licencePlate", value); // Actualiza el valor en react-hook-form
+  };
+
+  //manejador del estado de un typeVehicle
+  //si el type es BICYCLE DESABILITA LA licencePlate(las bicis no llevan patente)
+  const handleTypeVehicleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTypeVehicle(e.target.value);
+  };
+
   return (
     <>
+      <div>
+        {toast && (
+          <ToastMessage
+            message={toast.message}
+            type={toast.type}
+            onClose={handleCloseToast}
+          />
+        )}
+      </div>
       <div className="flex justify-start md:ml-20 lg:ml-20">
         <div className="w-full max-w-lg">
           <div className="flex flex-wrap items-center justify-center">
@@ -17,7 +86,7 @@ const EntryVehicleForm = (props: Props) => {
                 </div>
 
                 <div className="mx-auto space-y-6 p-10">
-                  <form action="#">
+                  <form onSubmit={handleSubmit(saveParking)}>
                     <div className="grid grid-cols-6 gap-6">
                       <div className="col-span-6 sm:col-span-3">
                         <label
@@ -25,17 +94,46 @@ const EntryVehicleForm = (props: Props) => {
                           className="text-gray-900 mb-2 block text-sm font-medium"
                         >
                           Patente
-                          <span className="mx-2 font-bold text-danger">
-                            * requerido
-                          </span>
+                          {typeVehicle === TYPE_VEHICLE.BICYCLE ? (
+                            <span className="mx-2 rounded-md bg-yellow-100 p-0.5 font-bold text-warning">
+                              No requerida
+                            </span>
+                          ) : (
+                            <span className="mx-2 font-bold text-danger">
+                              * requerido
+                            </span>
+                          )}
                         </label>
                         <input
                           type="text"
-                          name="licencePlate"
+                          // name="licencePlate"
                           id="licencePlate"
                           className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-2 text-slate-700 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter  dark:bg-form-input dark:text-white dark:focus:border-primary"
                           placeholder="AXXX-XXX"
+                          {...register("licencePlate", {
+                            required:
+                              typeVehicle !== TYPE_VEHICLE.BICYCLE
+                                ? "Debe ingresar una Matricula"
+                                : false,
+                            pattern:
+                              typeVehicle !== TYPE_VEHICLE.BICYCLE
+                                ? {
+                                    value:
+                                      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,8}$/,
+                                    message:
+                                      "La Matricula debe contener letras y números, con una longitud de 6 a 8 caracteres y no más de 4 letras ni más de 4 números",
+                                  }
+                                : undefined,
+                          })}
+                          onChange={handleLicencePlateChange} // Convierte a mayúsculas al cambiar
+                          disabled={typeVehicle === TYPE_VEHICLE.BICYCLE} // Desactiva el campo si el tipo de vehículo es bicicleta
                         />
+
+                        {errors.licencePlate && (
+                          <p className="p-0.2 m-0.5 rounded-md bg-rose-200 text-center text-sm text-danger">
+                            {errors.licencePlate.message}
+                          </p>
+                        )}
                       </div>
 
                       <div className="col-span-6 sm:col-span-3">
@@ -48,49 +146,69 @@ const EntryVehicleForm = (props: Props) => {
 
                         <div className="flex gap-x-0.5 rounded-lg border-[1.5px] border-stroke bg-transparent p-1 dark:border-form-strokedark">
                           <div className="mr-0.5">
-                            <label className="bg-gray-100 my-1 flex cursor-pointer rounded-md px-1 py-1 text-slate-700 hover:bg-slate-200 dark:hover:bg-graydark">
+                            <label className="bg-gray-100 my-1 flex cursor-pointer rounded-md px-1 py-1 text-slate-700 hover:bg-slate-200 dark:text-slate-200 dark:hover:bg-graydark">
                               <input
                                 type="radio"
-                                name="typeVehicle"
                                 value={TYPE_VEHICLE.CAR}
                                 className="accent-green-500"
+                                {...register("typeVehicle", {
+                                  required:
+                                    "Debe seleccionar un tipo de vehículo",
+                                })}
+                                onChange={handleTypeVehicleChange}
                               />
                               <i className="pl-1">Auto</i>
                             </label>
-                            <label className="bg-gray-100 my-1 flex cursor-pointer rounded-md px-1 py-1 text-slate-700 hover:bg-slate-200 dark:hover:bg-graydark">
+                            <label className=" bg-gray-100 my-1 flex cursor-pointer rounded-md px-1 py-1 text-slate-700 hover:bg-slate-200 dark:text-slate-200 dark:hover:bg-graydark">
                               <input
                                 type="radio"
-                                name="typeVehicle"
                                 value={TYPE_VEHICLE.MOTORCYCLE}
                                 className="accent-green-500"
+                                {...register("typeVehicle", {
+                                  required:
+                                    "Debe seleccionar un tipo de vehículo",
+                                })}
+                                onChange={handleTypeVehicleChange}
                               />
                               <i className="pl-1">Motocicleta</i>
                             </label>
                           </div>
                           <div>
-                            <label className="bg-gray-100 my-1 flex cursor-pointer rounded-md py-1 text-slate-700 hover:bg-slate-200 dark:hover:bg-graydark ">
+                            <label className="bg-gray-100 my-1 flex cursor-pointer rounded-md py-1 text-slate-700 hover:bg-slate-200 dark:text-slate-200 dark:hover:bg-graydark ">
                               <input
                                 type="radio"
-                                name="typeVehicle"
                                 value={TYPE_VEHICLE.BICYCLE}
                                 className="accent-green-500"
+                                {...register("typeVehicle", {
+                                  required:
+                                    "Debe seleccionar un tipo de vehículo",
+                                })}
+                                onChange={handleTypeVehicleChange}
                               />
                               <i className="pl-1">Bicicleta</i>
                             </label>
 
-                            <label className="bg-gray-100 my-1 flex cursor-pointer rounded-md py-1 text-slate-700 hover:bg-slate-200 dark:hover:bg-graydark ">
+                            <label className="bg-gray-100 my-1 flex cursor-pointer rounded-md py-1 text-slate-700 hover:bg-slate-200 dark:text-slate-200 dark:hover:bg-graydark ">
                               <input
                                 type="radio"
-                                name="typeVehicle"
                                 value={TYPE_VEHICLE.TRUCK}
                                 className="accent-green-500"
+                                {...register("typeVehicle", {
+                                  required:
+                                    "Debe seleccionar un tipo de vehículo",
+                                })}
+                                onChange={handleTypeVehicleChange}
                               />
                               <i className="pl-1">Utilitario</i>
                             </label>
                           </div>
                         </div>
 
-                        {/** */}
+                        {errors.typeVehicle && (
+                          <p className="p-0.2 m-0.5 rounded-md bg-rose-200 text-center text-sm text-danger">
+                            {errors.typeVehicle.message}
+                          </p>
+                        )}
                       </div>
 
                       <div className="col-span-6 sm:col-span-3">
@@ -105,11 +223,11 @@ const EntryVehicleForm = (props: Props) => {
                         </label>
 
                         <select
-                          name="color"
                           id="color"
+                          defaultValue=""
                           className="w-52 rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-2 text-slate-600 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary   lg:w-100"
                         >
-                          <option value="" disabled selected>
+                          <option value="" disabled>
                             Elija color de vehículo
                           </option>
                           {Object.entries(Color).map(([key, value]) => (
@@ -132,11 +250,23 @@ const EntryVehicleForm = (props: Props) => {
                         </label>
                         <textarea
                           id="note"
-                          name="note"
                           rows={3}
                           placeholder="Ingrese una descripción si es necesario"
-                          className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-slate-700 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                          className="w-full resize-none overflow-hidden rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-slate-700 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                          //maxLength={150} // Limita a 50 caracteres
+                          {...register("note", {
+                            maxLength: {
+                              value: 150,
+                              message:
+                                "La descripción no puede exceder los 150 caracteres",
+                            },
+                          })}
                         ></textarea>
+                        {errors.note && (
+                          <p className="p-0.2 m-0.5 rounded-md bg-rose-200 text-center text-sm text-danger">
+                            {errors.note.message}
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -158,9 +288,42 @@ const EntryVehicleForm = (props: Props) => {
           </div>
         </div>
       </div>
-      {/** */}
     </>
   );
 };
-//border-gray-200 rounded-b border-t border-stroke px-6.5 py-4 dark:border-strokedark
+
 export default EntryVehicleForm;
+
+/*
+
+
+  {...register("licencePlate", {
+                            required:
+                              typeVehicle !== TYPE_VEHICLE.BICYCLE
+                                ? "Debe ingresar una Matricula"
+                                : false,
+                            pattern:
+                              typeVehicle !== TYPE_VEHICLE.BICYCLE
+                                ? {
+                                    value: /^[A-Za-z0-9]{6,8}$/,
+                                    message:
+                                      "La Matricula debe contener  letras y números, con una longitud de 6 a 8 caracteres",
+                                  }
+                                : undefined,
+                            minLength:
+                              typeVehicle !== TYPE_VEHICLE.BICYCLE
+                                ? {
+                                    value: 6,
+                                    message:
+                                      "La patente debe tener al menos 6 caracteres",
+                                  }
+                                : undefined,
+                            maxLength: {
+                              value: 8,
+                              message:
+                                "La patente no puede tener más de 8 caracteres",
+                            },
+                          })}
+
+
+*/

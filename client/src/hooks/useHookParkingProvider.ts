@@ -11,6 +11,7 @@ export const useHookParkingProvider = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+  /*
     setLoading(true);
     // setParkings(data);
 
@@ -19,7 +20,10 @@ export const useHookParkingProvider = () => {
 
       setLoading(false);
     }, 1000);
-    /** fetchParkings()
+  */
+
+    setLoading(true)
+     fetchParkings()
       .then((response) => {
         //  console.log("data", response);
         setParkings(response);
@@ -27,7 +31,7 @@ export const useHookParkingProvider = () => {
       })
       .catch((error) => {
         console.error("Error fetching parkings", error);
-      }); */
+      }); 
   }, []);
 
   // console.log("Loading parkings...", parkings);
