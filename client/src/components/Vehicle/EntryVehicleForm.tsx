@@ -282,7 +282,7 @@ const EntryVehicleForm = () => {
                         Crear Parking
                       </button>
                       <button
-                        className="text-medium rounded-lg bg-slate-500 px-5 py-2.5 text-center font-medium text-white hover:font-semibold hover:opacity-80 focus:ring-4 focus:ring-slate-600"
+                        className="text-medium rounded-lg bg-slate-500 px-5 py-2.5 text-center font-medium text-white hover:font-semibold hover:opacity-80 "
                         type="reset"
                       >
                         Borrar campos
