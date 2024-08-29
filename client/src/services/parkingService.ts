@@ -3,7 +3,7 @@
 import {axios,AxiosError} from "@/config/axiosConfig";
 import { ISaveParkingProp } from "@/interfaces/ISaveParkingProp";
 import { Parking } from "@/types/parking";
-import handleServiceError from "@/utils/handleError";
+import handleServiceError from "@/utils/handleServiceError";
 
 
 export const fetchParkings = async (): Promise<Parking[] | undefined> => {

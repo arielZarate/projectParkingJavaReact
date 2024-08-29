@@ -8,9 +8,9 @@ import validateLicencePlate from "@/utils/validateLicencePlateExit";
 import { useRouter } from "next/navigation";
 import IFinalizeParkingProp from "@/interfaces/IFinalizeParkingProp";
 import { postFinalizeParkings } from "@/services/parkingService";
-type Props = {};
+import handlerErrorToast from "@/utils/HandleErrorToast";
 
-const ExitVehicleForm = (props: Props) => {
+const ExitVehicleForm = () => {
   const [typeVehicle, setTypeVehicle] = useState<string>("");
   const router = useRouter(); // Inicializar useRoute
   //==============hook de toast=============
@@ -50,13 +50,7 @@ const ExitVehicleForm = (props: Props) => {
         router.push("/tables"); // Redirigir a la página deseada
       }, 5000);
     } catch (error) {
-      console.error(error);
-      if (error instanceof Error) {
-        setToast({
-          message: "Error al Finalizar parking",
-          type: "error",
-        });
-      }
+      handlerErrorToast(error, setToast);
     }
   };
 
