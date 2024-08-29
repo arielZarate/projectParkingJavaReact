@@ -1,6 +1,9 @@
-export enum TYPE_VEHICLE {
+enum TYPE_VEHICLE {
   CAR = "CAR",
   MOTORCYCLE = "MOTORCYCLE",
   TRUCK = "TRUCK",
   BICYCLE = "BICYCLE",
 }
+
+
+export default TYPE_VEHICLE;

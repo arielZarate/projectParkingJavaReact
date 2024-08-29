@@ -2,15 +2,18 @@
 
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { TYPE_VEHICLE } from "@/enum/typeVehicle";
+import TYPE_VEHICLE from "@/enum/typeVehicle";
 import { Color } from "@/enum/colorVehicle";
 import { ISaveParkingProp } from "@/interfaces/ISaveParkingProp";
 import { postParkings } from "@/services/parkingService";
 import useToast from "../ToastMessage/useToast";
 import validateLicencePlate from "@/utils/validateLicencePlate";
+import { useRouter } from "next/navigation";
+
 const EntryVehicleForm = () => {
   //useState
   const [typeVehicle, setTypeVehicle] = useState<string>("");
+  const router = useRouter(); // Inicializar useRoute
   //==============hook de toast=============
   const { setToast, toast, ToastMessage, handleCloseToast } = useToast();
   //=======REACT HOOK FORM==============================
@@ -25,7 +28,10 @@ const EntryVehicleForm = () => {
   const saveParking = async (data: ISaveParkingProp) => {
     try {
       //======================VALIDACIONES=================================
-      const licencePlateError = validateLicencePlate(data.licencePlate || "");
+      const licencePlateError = validateLicencePlate(
+        data.licencePlate || "",
+        typeVehicle,
+      );
       if (licencePlateError) {
         setToast({
           message: licencePlateError,
@@ -40,6 +46,10 @@ const EntryVehicleForm = () => {
       if (res != undefined || res != null) {
         setToast({ message: "Parking creado con éxito", type: "success" });
       }
+
+      setTimeout(() => {
+        router.push("/tables"); // Redirigir a la página deseada
+      }, 5000);
     } catch (error) {
       console.error(error);
       if (error instanceof Error) {
@@ -113,10 +123,8 @@ const EntryVehicleForm = () => {
                               typeVehicle !== TYPE_VEHICLE.BICYCLE
                                 ? "Debe ingresar una Matricula"
                                 : false,
-                            validate:
-                              typeVehicle !== TYPE_VEHICLE.BICYCLE
-                                ? validateLicencePlate
-                                : undefined,
+                            validate: (value) =>
+                              validateLicencePlate(value, typeVehicle),
                           })}
                           onChange={handleLicencePlateChange} // Convierte a mayúsculas al cambiar
                           disabled={typeVehicle === TYPE_VEHICLE.BICYCLE} // Desactiva el campo si el tipo de vehículo es bicicleta

@@ -1,6 +1,13 @@
 // utils/validateLicencePlate.ts
- const validateLicencePlate = (value: string): string | undefined => {
-    const pattern = /^(?=(?:[A-Za-z]*\d){1,4})(?=(?:\d*[A-Za-z]){1,4})[A-Za-z\d]{6,8}$/;
+
+import TYPE_VEHICLE from "@/enum/typeVehicle";
+ const validateLicencePlate = (value: string,typeVehicle:string): string | undefined => {
+  if (typeVehicle === TYPE_VEHICLE.BICYCLE) {
+    return undefined; // No se requiere validación para bicicletas
+  }
+
+  
+  const pattern = /^(?=(?:[A-Za-z]*\d){1,4})(?=(?:\d*[A-Za-z]){1,4})[A-Za-z\d]{6,8}$/;
   
     if (!pattern.test(value)) {
       return "La Matricula debe contener letras y números, con una longitud de 6 a 8 caracteres, y no más de 4 letras ni más de 4 números";
