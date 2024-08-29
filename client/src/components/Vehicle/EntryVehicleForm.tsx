@@ -7,6 +7,7 @@ import { Color } from "@/enum/colorVehicle";
 import { ISaveParkingProp } from "@/interfaces/ISaveParkingProp";
 import { postParkings } from "@/services/parkingService";
 import useToast from "../ToastMessage/useToast";
+import validateLicencePlate from "@/utils/validateLicencePlate";
 const EntryVehicleForm = () => {
   //useState
   const [typeVehicle, setTypeVehicle] = useState<string>("");
@@ -22,20 +23,17 @@ const EntryVehicleForm = () => {
 
   //===========funcion saveParking==================
   const saveParking = async (data: ISaveParkingProp) => {
-    // Validar que la licencia tenga no más de 4 letras y 4 números
-    const licencePlate = data.licencePlate || "";
-    const letters = licencePlate.replace(/[^A-Za-z]/g, "").length;
-    const numbers = licencePlate.replace(/[^0-9]/g, "").length;
-
-    if (letters > 4 || numbers > 4) {
-      setToast({
-        message: "La patente no puede tener más de 4 letras o 4 números",
-        type: "error",
-      });
-      return;
-    }
-
     try {
+      //======================VALIDACIONES=================================
+      const licencePlateError = validateLicencePlate(data.licencePlate || "");
+      if (licencePlateError) {
+        setToast({
+          message: licencePlateError,
+          type: "error",
+        });
+        return;
+      }
+      //==================================================================
       //console.log("antes de enviar los datos", data);
       const res = await postParkings(data);
 
@@ -109,20 +107,15 @@ const EntryVehicleForm = () => {
                           // name="licencePlate"
                           id="licencePlate"
                           className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-2 text-slate-700 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter  dark:bg-form-input dark:text-white dark:focus:border-primary"
-                          placeholder="AXXX-XXX"
+                          placeholder="AXXX-XXXX"
                           {...register("licencePlate", {
                             required:
                               typeVehicle !== TYPE_VEHICLE.BICYCLE
                                 ? "Debe ingresar una Matricula"
                                 : false,
-                            pattern:
+                            validate:
                               typeVehicle !== TYPE_VEHICLE.BICYCLE
-                                ? {
-                                    value:
-                                      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,8}$/,
-                                    message:
-                                      "La Matricula debe contener letras y números, con una longitud de 6 a 8 caracteres y no más de 4 letras ni más de 4 números",
-                                  }
+                                ? validateLicencePlate
                                 : undefined,
                           })}
                           onChange={handleLicencePlateChange} // Convierte a mayúsculas al cambiar
@@ -293,37 +286,3 @@ const EntryVehicleForm = () => {
 };
 
 export default EntryVehicleForm;
-
-/*
-
-
-  {...register("licencePlate", {
-                            required:
-                              typeVehicle !== TYPE_VEHICLE.BICYCLE
-                                ? "Debe ingresar una Matricula"
-                                : false,
-                            pattern:
-                              typeVehicle !== TYPE_VEHICLE.BICYCLE
-                                ? {
-                                    value: /^[A-Za-z0-9]{6,8}$/,
-                                    message:
-                                      "La Matricula debe contener  letras y números, con una longitud de 6 a 8 caracteres",
-                                  }
-                                : undefined,
-                            minLength:
-                              typeVehicle !== TYPE_VEHICLE.BICYCLE
-                                ? {
-                                    value: 6,
-                                    message:
-                                      "La patente debe tener al menos 6 caracteres",
-                                  }
-                                : undefined,
-                            maxLength: {
-                              value: 8,
-                              message:
-                                "La patente no puede tener más de 8 caracteres",
-                            },
-                          })}
-
-
-*/
