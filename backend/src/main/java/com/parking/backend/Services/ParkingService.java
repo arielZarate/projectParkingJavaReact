@@ -176,7 +176,10 @@ public class ParkingService {
             // Actualizar el registro de parking
             return parkingRepository.save(parkingInProgress);
 
-        } catch (RuntimeException e) {
+        } catch (CustomException e) {
+            throw e;
+        }
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -197,7 +200,8 @@ public class ParkingService {
             }
         } catch (CustomException e) {
             throw e;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -252,6 +256,7 @@ public class ParkingService {
         } catch (Exception e) {
             throw new CustomException("Error al buscar parkings por estado: " + e.getMessage());
         }
+
     }
 
 
@@ -288,7 +293,11 @@ public class ParkingService {
 
             return Math.round(durationInHours);
 
-        } catch (Exception e) {
+        } 
+        catch (CustomException e) {
+            throw e;
+        }
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

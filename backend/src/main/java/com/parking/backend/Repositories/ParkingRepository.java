@@ -1,15 +1,15 @@
 package com.parking.backend.Repositories;
 
-import com.parking.backend.Enum.STATUS_PARKING;
-import com.parking.backend.Models.Parking;
-import com.parking.backend.Models.Vehicle;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
+import com.parking.backend.Enum.STATUS_PARKING;
+import com.parking.backend.Models.Parking;
 
 
 @Repository

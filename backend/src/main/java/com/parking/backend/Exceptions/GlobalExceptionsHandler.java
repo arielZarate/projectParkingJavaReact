@@ -1,14 +1,15 @@
 package com.parking.backend.Exceptions;
 
-import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 @ControllerAdvice
 public class GlobalExceptionsHandler {
@@ -25,9 +26,12 @@ System.err.println y e.printStackTrace() son formas básicas que funcionan, pero
     @ExceptionHandler(CustomException.class)
     @ResponseBody
     public ResponseEntity<String> handleExceptionMessage(CustomException e) {
-        logger.log(Level.SEVERE, "Error: " + e.getMessage(), e);
+       // logger.log(Level.SEVERE, "Error: " + e.getMessage(), e);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
+
+
+
 
 
     @ExceptionHandler(InvalidFormatException.class)
@@ -46,9 +50,13 @@ System.err.println y e.printStackTrace() son formas básicas que funcionan, pero
     @ResponseBody
     public ResponseEntity<String> handleException(Exception e) {
        // e.printStackTrace();
-        logger.log(Level.SEVERE, "Error: " + e.getMessage(), e);
+       // logger.log(Level.SEVERE, "Error: " + e.getMessage(), e);
         //System.out.println("Error:" + e.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage() );
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage() );
 
     }
+
+
+
+
 }
