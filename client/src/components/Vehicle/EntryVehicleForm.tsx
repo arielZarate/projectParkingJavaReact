@@ -9,6 +9,7 @@ import useToast from "../ToastMessage/useToast";
 import { useForm } from "react-hook-form";
 import validateLicencePlate from "@/utils/validateLicencePlateEntry";
 import { useRouter } from "next/navigation";
+import handlerErrorToast from "../ToastMessage/HandleErrorToast";
 
 const EntryVehicleForm = () => {
   //useState
@@ -51,18 +52,8 @@ const EntryVehicleForm = () => {
         router.push("/tables"); // Redirigir a la página deseada
       }, 5000);
     } catch (error) {
-      console.error(error);
-      if (error instanceof Error) {
-        setToast({
-          message: error.message,
-          type: "error",
-        });
-      } else {
-        setToast({
-          message: "Un error inesperado ocurrió",
-          type: "error",
-        });
-      }
+      //console.error(error);
+      handlerErrorToast(error, setToast);
     }
   };
 

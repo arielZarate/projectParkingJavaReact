@@ -1,7 +1,3 @@
-
-
-
-
 interface ToastProp{
  message:string;
 type:"success" | "error" | "info" | "warning";
@@ -14,7 +10,7 @@ const handlerErrorToast=(  error:unknown,setToast:setToastFunction)=>{
     if (error instanceof Error) {
         setToast({
           message: error.message,
-          type: "error",
+          type: "info",
         });
       } else {
         setToast({

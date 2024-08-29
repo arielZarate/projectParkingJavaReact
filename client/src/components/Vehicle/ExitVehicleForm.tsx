@@ -8,7 +8,7 @@ import validateLicencePlate from "@/utils/validateLicencePlateExit";
 import { useRouter } from "next/navigation";
 import IFinalizeParkingProp from "@/interfaces/IFinalizeParkingProp";
 import { postFinalizeParkings } from "@/services/parkingService";
-import handlerErrorToast from "@/utils/HandleErrorToast";
+import handlerErrorToast from "@/components/ToastMessage/HandleErrorToast";
 
 const ExitVehicleForm = () => {
   const [typeVehicle, setTypeVehicle] = useState<string>("");
