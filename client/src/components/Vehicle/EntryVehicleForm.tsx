@@ -274,12 +274,18 @@ const EntryVehicleForm = () => {
                     <div className="relative mt-8">
                       <div className="absolute left-0 right-0 -mx-10 border-t border-stroke dark:border-strokedark"></div>
                     </div>
-                    <div className="flex justify-start  py-4">
+                    <div className="flex justify-around  py-4">
                       <button
                         className="text-medium rounded-lg bg-primary px-5 py-2.5 text-center font-medium text-white hover:font-semibold hover:opacity-80 focus:ring-4 focus:ring-green-700"
                         type="submit"
                       >
                         Crear Parking
+                      </button>
+                      <button
+                        className="text-medium rounded-lg bg-slate-500 px-5 py-2.5 text-center font-medium text-white hover:font-semibold hover:opacity-80 focus:ring-4 focus:ring-slate-600"
+                        type="reset"
+                      >
+                        Borrar campos
                       </button>
                     </div>
                   </form>
