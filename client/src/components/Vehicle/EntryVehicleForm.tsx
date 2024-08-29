@@ -49,7 +49,7 @@ const EntryVehicleForm = () => {
       }
 
       setTimeout(() => {
-        router.push("/tables"); // Redirigir a la página deseada
+        router.push("/vehicle/table"); // Redirigir a la página deseada
       }, 5000);
     } catch (error) {
       //console.error(error);

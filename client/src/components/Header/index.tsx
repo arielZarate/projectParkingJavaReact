@@ -67,7 +67,9 @@ const Header = (props: {
           </Link>
         </div>
 
-        {/*searchBar */}
+        {/*searchBar 
+        
+        
         <div className="hidden sm:block">
           <form action="https://formbold.com/s/unique_form_id" method="POST">
             <div className="relative">
@@ -86,6 +88,9 @@ const Header = (props: {
             </div>
           </form>
         </div>
+        */}
+
+        <div className="hidden sm:block"></div>
 
         <div className="flex items-center gap-3 2xsm:gap-7">
           <ul className="flex items-center gap-2 2xsm:gap-4">

@@ -61,7 +61,7 @@ const menuGroups = [
       {
         icon: <FaTableList size={18} />,
         label: "Listado de parking",
-        route: "/tables",
+        route: "/vehicle/table",
       },
 
       {
