@@ -1,5 +1,5 @@
 
-import { TYPE_VEHICLE } from "@/enum/typeVehicle";
+import TYPE_VEHICLE  from "@/enum/typeVehicle";
 import { Color } from "@/enum/colorVehicle";
 
 

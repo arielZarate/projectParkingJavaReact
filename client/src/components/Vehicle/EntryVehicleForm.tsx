@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import TYPE_VEHICLE from "@/enum/typeVehicle";
 import { Color } from "@/enum/colorVehicle";
 import { ISaveParkingProp } from "@/interfaces/ISaveParkingProp";
 import { postParkings } from "@/services/parkingService";
+import TYPE_VEHICLE from "@/enum/typeVehicle";
 import useToast from "../ToastMessage/useToast";
-import validateLicencePlate from "@/utils/validateLicencePlate";
+import { useForm } from "react-hook-form";
+import validateLicencePlate from "@/utils/validateLicencePlateEntry";
 import { useRouter } from "next/navigation";
 
 const EntryVehicleForm = () => {
@@ -54,7 +54,12 @@ const EntryVehicleForm = () => {
       console.error(error);
       if (error instanceof Error) {
         setToast({
-          message: error.message || "Error al crear el parking",
+          message: error.message,
+          type: "error",
+        });
+      } else {
+        setToast({
+          message: "Un error inesperado ocurrió",
           type: "error",
         });
       }
@@ -92,7 +97,6 @@ const EntryVehicleForm = () => {
                 <div className="flex items-start justify-between rounded-t border-b border-stroke px-6.5 py-4 dark:border-strokedark">
                   <h3 className="text-xl font-semibold">Crear Parking</h3>
                 </div>
-
                 <div className="mx-auto space-y-6 p-10">
                   <form onSubmit={handleSubmit(saveParking)}>
                     <div className="grid grid-cols-6 gap-6">
@@ -290,6 +294,7 @@ const EntryVehicleForm = () => {
                     </div>
                   </form>
                 </div>
+                {/** */}
               </div>
             </div>
           </div>

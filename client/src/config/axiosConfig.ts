@@ -1,5 +1,5 @@
 // axiosConfig.ts
-import axios from "axios";
+import axios,{AxiosError} from "axios";
 
 // Configurar la URL base global
 axios.defaults.baseURL = "http://localhost:8085"; // Cambia esto a la URL base de tu API
@@ -9,4 +9,4 @@ axios.defaults.baseURL = "http://localhost:8085"; // Cambia esto a la URL base d
 axios.defaults.headers.common["Content-Type"] = "application/json"; // Encabezado común para todas las solicitudes
 
 // Puedes exportar Axios si lo necesitas en otros archivos
-export default axios;
+export {axios,AxiosError} 

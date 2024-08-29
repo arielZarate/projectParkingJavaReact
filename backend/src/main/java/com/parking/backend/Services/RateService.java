@@ -1,18 +1,18 @@
 package com.parking.backend.Services;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.parking.backend.Exceptions.CustomException;
-import com.parking.backend.Models.Rate;
-import com.parking.backend.Enum.TYPE_VEHICLE;
-import com.parking.backend.Repositories.RateRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.parking.backend.Enum.TYPE_VEHICLE;
+import com.parking.backend.Exceptions.CustomException;
+import com.parking.backend.Models.Rate;
+import com.parking.backend.Repositories.RateRepository;
 
 @Service
 

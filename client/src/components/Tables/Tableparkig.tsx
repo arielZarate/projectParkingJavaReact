@@ -33,7 +33,10 @@ const TableParking: React.FC = () => {
               <th className="min-w-[150px] px-2 py-2 font-medium text-black dark:text-white">
                 Fecha Ingreso
               </th>
-              <th className="min-w-[80px] px-2 py-2 font-medium text-black dark:text-white">
+              <th className="min-w-[60px] px-2 py-2 font-medium text-black dark:text-white">
+                Horas
+              </th>
+              <th className="min-w-[100px] px-2 py-2 font-medium text-black dark:text-white">
                 Costo Total
               </th>
             </tr>
@@ -78,9 +81,17 @@ const TableParking: React.FC = () => {
                     {parking.exitTime}
                   </p>
                 </td>
+                <td className=" border-b border-[#eee] px-2  py-4  text-center dark:border-strokedark">
+                  <p className="text-black dark:text-white">{parking.hours}</p>
+                </td>
 
-                <td className="border-b border-[#eee] px-2 py-4 pl-7.5 dark:border-strokedark xl:pl-11">
-                  <p className="text-black dark:text-white">{parking.cost}</p>
+                <td className="border-b border-[#eee] px-2  py-4 dark:border-strokedark xl:pr-5">
+                  <p className="text-black dark:text-white">
+                    {new Intl.NumberFormat("es-AR", {
+                      style: "currency",
+                      currency: "ARS",
+                    }).format(parking.cost)}
+                  </p>
                 </td>
               </tr>
             ))}

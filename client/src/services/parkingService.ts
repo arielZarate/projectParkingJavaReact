@@ -1,19 +1,19 @@
 // services/parkingService.ts
 
-import axios from "@/config/axiosConfig";
+import {axios,AxiosError} from "@/config/axiosConfig";
 import { ISaveParkingProp } from "@/interfaces/ISaveParkingProp";
 import { Parking } from "@/types/parking";
+import handleServiceError from "@/utils/handleError";
 
 
-
-export const fetchParkings = async (): Promise<Parking[]> => {
+export const fetchParkings = async (): Promise<Parking[] | undefined> => {
   try {
     const response = await axios.get<Parking[]>("/api/parking");
     const data = response.data;
     //console.log("datos", JSON.stringify(data));
     return data;
   } catch (error) {
-    throw new Error("Ha fallado el fetch de parkings");
+   handleServiceError(error)
   }
 };
 
@@ -29,15 +29,22 @@ export const postParkings = async (parking:ISaveParkingProp): Promise<Parking | 
     //console.log("response\n",response)
     return response.data;
   } catch (error) {
-
-    if(error instanceof Error)
-    throw new Error(error.message ||"Ha fallado la creacion del parking");
+    handleServiceError(error);
   }
 };
 
 
 
 
+export const postFinalizeParkings = async (licencePlate:string): Promise<Parking | undefined> => {
+  try {
+    const response = await axios.post<Parking>(`/api/parking/finalize/${licencePlate}`);
+    //console.log("response\n",response)
+    return response.data;
+  } catch (error) {
+      handleServiceError(error);
+  }
+};
 
 
 
