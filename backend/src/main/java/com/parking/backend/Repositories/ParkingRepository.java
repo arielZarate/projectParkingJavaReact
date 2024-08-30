@@ -27,11 +27,11 @@ public interface ParkingRepository extends JpaRepository<Parking,Long > {
  
      */
 
+      // Page<Parking> findByVehicleLicencePlate(String licencePlate,Pageable pageable);
 
 
-    
+
      List<Parking> findByVehicleLicencePlate(String licencePlate);
-
 
     List<Parking> findByStatus(STATUS_PARKING status);
 }

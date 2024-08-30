@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Color } from "@/enum/colorVehicle";
+import COLOR from "@/enum/colorVehicle";
 import { ISaveParkingProp } from "@/interfaces/ISaveParkingProp";
 import { postParkings } from "@/services/parkingService";
 import TYPE_VEHICLE from "@/enum/typeVehicle";
@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import validateLicencePlate from "@/utils/validateLicencePlateEntry";
 import { useRouter } from "next/navigation";
 import handlerErrorToast from "../ToastMessage/HandleErrorToast";
+import { LiaRegistered } from "react-icons/lia";
 
 const EntryVehicleForm = () => {
   //useState
@@ -41,12 +42,12 @@ const EntryVehicleForm = () => {
         return;
       }
       //==================================================================
-      //console.log("antes de enviar los datos", data);
-      const res = await postParkings(data);
+      console.log("antes de enviar los datos", data);
+      //  const res = await postParkings(data);
 
-      if (res != undefined || res != null) {
+      /** if (res != undefined || res != null) {
         setToast({ message: "Parking creado con éxito", type: "success" });
-      }
+      } */
 
       setTimeout(() => {
         router.push("/vehicle/table"); // Redirigir a la página deseada
@@ -222,11 +223,12 @@ const EntryVehicleForm = () => {
                           id="color"
                           defaultValue=""
                           className="w-52 rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-2 text-slate-600 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary   lg:w-100"
+                          {...register("color")}
                         >
                           <option value="" disabled>
                             Elija color de vehículo
                           </option>
-                          {Object.entries(Color).map(([key, value]) => (
+                          {Object.entries(COLOR).map(([key, value]) => (
                             <option key={key} value={key}>
                               {value}
                             </option>

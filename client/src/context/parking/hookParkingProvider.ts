@@ -16,8 +16,8 @@ import { useEffect, useState } from "react";
   const loadParkings = async () => {
     setLoading(true);
     try {
-      const result = await fetchParkings();
-      setParkings(result);
+     const result = await fetchParkings();
+     setParkings(result);
     } catch (error) {
       //usar toast
       console.error("Error fetching parkings", error);
@@ -31,9 +31,9 @@ import { useEffect, useState } from "react";
    const searchParking = async (licencePlate: string) => {
     //setLoading(true);
     try {
-      const parkingFound = await getParkingByLicencePlate(licencePlate);
+     // const parkingFound = await getParkingByLicencePlate(licencePlate);
        //console.log(parkingFound)
-       setParkings(parkingFound);
+      // setParkings(parkingFound);
     
    } catch (error) {
       console.error("Error searching parking by licence plate", error);

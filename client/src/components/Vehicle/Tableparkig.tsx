@@ -1,9 +1,13 @@
 "use client";
 import useHookParkingContext from "@/context/parking/useHookParkingContext";
-import { VehicleStatus } from "@/enum/vehicleStatus";
+import STATUS_VEHICLE from "@/enum/statusVehicle";
 import Loader from "../common/Loader";
-import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "../Filter/SearBar";
 
+import SelectTypeVehicle from "../Filter/SelectTypeVehicle";
+import SelectGroupOne from "../Z-components/SelectGroup/SelectGroupOne";
+import SelectGroupTwo from "../Z-components/SelectGroup/SelectGroupTwo";
+import SelectStatusVehicle from "../Filter/SelectStatusVehicle";
 
 const TableParking: React.FC = () => {
   const { parkings, loading } = useHookParkingContext();
@@ -15,10 +19,14 @@ const TableParking: React.FC = () => {
   return (
     <>
       <div className="my-2">
-        <h1 className="text-large py-2 font-medium text-slate-700 dark:text-slate-400">
+        <h1 className="py-2 text-xl font-medium text-slate-700 dark:text-slate-400">
           Filtro de Parking
         </h1>
-        <SearchBar />
+        <div className="flex flex-col  gap-3 md:flex-row">
+          <SearchBar />
+          <SelectTypeVehicle />
+          <SelectStatusVehicle />
+        </div>
       </div>
       <div className="rounded-sm border border-stroke bg-white px-4 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
         <div className="max-w-full overflow-auto ">
@@ -53,7 +61,7 @@ const TableParking: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {parkings.length &&
+              {parkings &&
                 parkings.map((parking) => (
                   <tr key={parking.id}>
                     <td className="border-b border-[#eee] px-1 py-4  dark:border-strokedark xl:pl-11">
@@ -78,12 +86,12 @@ const TableParking: React.FC = () => {
                       <p
                         className={`inline-flex rounded-full bg-opacity-10 px-3 py-1 text-sm font-medium 
                       ${
-                        parking.status === VehicleStatus.COMPLETED
+                        parking.status === STATUS_VEHICLE.COMPLETED
                           ? "bg-success text-success"
                           : "bg-warning text-warning"
                       }`}
                       >
-                        {parking.status === VehicleStatus.COMPLETED
+                        {parking.status === STATUS_VEHICLE.COMPLETED
                           ? "Finalizado"
                           : "En proceso"}
                       </p>

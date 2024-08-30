@@ -1,5 +1,5 @@
 // colorEnum.ts
-export enum Color {
+export enum COLOR {
   RED = "Rojo",
   BLUE = "Azul",
   GREEN = "Verde",
@@ -22,3 +22,6 @@ export enum Color {
   OLIVE = "Oliva",
   LIME = "Lima",
 }
+
+
+export default COLOR;
