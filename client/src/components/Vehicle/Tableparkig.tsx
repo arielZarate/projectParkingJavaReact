@@ -1,10 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
-import { VehicleStatus } from "@/enum/vehicleStatus";
 import useHookParkingContext from "@/context/parking/useHookParkingContext";
+import { VehicleStatus } from "@/enum/vehicleStatus";
 import Loader from "../common/Loader";
 import SearchBar from "../SearchBar/SearchBar";
-import { Parking } from "@/types/parking";
+
 
 const TableParking: React.FC = () => {
   const { parkings, loading } = useHookParkingContext();

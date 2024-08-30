@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { fetchParkings, data, getParkingByLicencePlate } from "@/services/parkingService";
+import { fetchParkings, getParkingByLicencePlate } from "@/services/parkingService";
 import { Parking } from "@/types/parking";
+import { useEffect, useState } from "react";
 
 //TODO: hook para descentralizar la logica del Provider de parking
 
@@ -16,8 +16,8 @@ import { Parking } from "@/types/parking";
   const loadParkings = async () => {
     setLoading(true);
     try {
-      const allparkings = await fetchParkings();
-      setParkings(allparkings);
+      const result = await fetchParkings();
+      setParkings(result);
     } catch (error) {
       //usar toast
       console.error("Error fetching parkings", error);
@@ -40,9 +40,7 @@ import { Parking } from "@/types/parking";
       alert(error);
     } finally {
      setLoading(false);
-     
-     console.log(parkings)
-    }
+ }
      
   };
 
@@ -54,7 +52,7 @@ import { Parking } from "@/types/parking";
 
   return {
     //cada elemento que devuelva debo declararlo con su type en el provider
-  parkings,
+    parkings,
     loading,
     searchParking
   };
