@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 //import ECommerce from "@/components/Dashboard/E-commerce";
-import TableParking from "@/components/Tables/Tableparkig";
+import TableParking from "@/components/Vehicle/Tableparkig";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 type Props = {};
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";

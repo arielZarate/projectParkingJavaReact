@@ -33,9 +33,9 @@ public class ParkingController {
 
     @GetMapping
     public ResponseEntity<List<Parking>> getAllParking(){
-        List<Parking> parking= parkingService.findAllParking();
+        List<Parking> parkings= parkingService.findAllParking();
      //   return ResponseEntity.ok().body(parking);
-        return new ResponseEntity<>(parking, HttpStatus.OK);
+        return new ResponseEntity<>(parkings, HttpStatus.OK);
     }
 
 

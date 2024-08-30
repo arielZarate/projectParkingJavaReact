@@ -6,7 +6,7 @@ import { Parking } from "@/types/parking";
 import handleServiceError from "@/utils/handleServiceError";
 
 
-export const fetchParkings = async (): Promise<Parking[] | undefined> => {
+export const fetchParkings = async (): Promise<Parking[]> => {
   try {
     const response = await axios.get<Parking[]>("/api/parking");
     const data = response.data;
@@ -14,6 +14,9 @@ export const fetchParkings = async (): Promise<Parking[] | undefined> => {
     return data;
   } catch (error) {
    handleServiceError(error)
+
+   //en caso de error devolver un array
+   return [];
   }
 };
 
@@ -48,6 +51,17 @@ export const postFinalizeParkings = async (licencePlate:string): Promise<Parking
 
 
 
+export const getParkingByLicencePlate=async(licencePlate:string):Promise<Parking[]> =>{
+  try {
+    const response = await axios.get<Parking[]>(`/api/parking/licencePlate/${licencePlate}`);
+    //console.log("response\n",response.data)
+    return response.data;
+  } catch (error) {
+      handleServiceError(error);
+      return [];
+  }
+
+}
 
 
 

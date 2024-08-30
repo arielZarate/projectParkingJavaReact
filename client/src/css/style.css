@@ -5,8 +5,11 @@
 @tailwind utilities;
 
 @layer base {
-  body {
+  html,body {
     @apply relative z-1 min-h-screen bg-whiten font-satoshi text-base font-normal text-body;
+    height: 100%; /* Asegúrate de que el body ocupe toda la altura de la pantalla */
+    margin: 0; /* Elimina márgenes predeterminados */
+    padding: 0; /* Elimina rellenos predeterminados */
   }
 }
 

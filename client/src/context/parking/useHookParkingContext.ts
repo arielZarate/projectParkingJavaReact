@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useContext } from "react";
+import { useContext } from "react";
 
-import { ParkingContext } from "@/context/ParkingContext";
+import { ParkingContext } from "@/context/parking/ParkingProvider";
 import { ParkingContextType } from "@/interfaces/IParkingContextType";
 
 // Hook para usar el contexto de Parking con validación
-export const useHookParkingContext = (): ParkingContextType => {
+const useHookParkingContext = (): ParkingContextType => {
   const context = useContext(ParkingContext);
   // console.log("hook", context);
   if (context === undefined) {
@@ -17,4 +17,5 @@ export const useHookParkingContext = (): ParkingContextType => {
   return context;
 };
 
+export default  useHookParkingContext;
 //TODO: importo del Contexto y paso a hook para ser uaso por los components

@@ -1,104 +1,126 @@
 "use client";
-
+import { useState, useEffect } from "react";
 import { VehicleStatus } from "@/enum/vehicleStatus";
-import { useHookParkingContext } from "@/hooks/useHookParkingContext";
+import useHookParkingContext from "@/context/parking/useHookParkingContext";
 import Loader from "../common/Loader";
+import SearchBar from "../SearchBar/SearchBar";
+import { Parking } from "@/types/parking";
 
 const TableParking: React.FC = () => {
   const { parkings, loading } = useHookParkingContext();
-  // console.log(parkings);
 
   //UTILIZE EL MISMO LOADER DEL LAYOUT ,parece redundante pero aydua en la UX
   if (loading) {
     return <Loader />;
   }
   return (
-    <div className="rounded-sm border border-stroke bg-white px-4 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
-      <div className="max-w-full overflow-x-auto">
-        <table className="w-full table-auto">
-          <thead>
-            <tr className="bg-gray-2 text-left dark:bg-meta-4">
-              <th className="min-w-[80px] px-2 py-2 font-medium text-black dark:text-white xl:pl-11">
-                Patente
-              </th>
-              <th className="min-w-[100px] px-2 py-2 font-medium text-black dark:text-white">
-                Tipo de Vehiculo
-              </th>
-              <th className="min-w-[80px] px-2 py-2 font-medium text-black dark:text-white">
-                Estado
-              </th>
-              <th className="min-w-[150px] px-2 py-2 font-medium text-black dark:text-white">
-                Fecha Ingreso
-              </th>
-              <th className="min-w-[150px] px-2 py-2 font-medium text-black dark:text-white">
-                Fecha Ingreso
-              </th>
-              <th className="min-w-[60px] px-2 py-2 font-medium text-black dark:text-white">
-                Horas
-              </th>
-              <th className="min-w-[100px] px-2 py-2 font-medium text-black dark:text-white">
-                Costo Total
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {parkings?.map((parking) => (
-              <tr key={parking.id}>
-                <td className="border-b border-[#eee] px-2 py-4 pl-5 dark:border-strokedark xl:pl-11">
-                  <h5 className="font-medium text-black dark:text-white">
-                    {parking.vehicle.licencePlate}
-                  </h5>
-                  {/**  <p className="text-sm">${packageItem.price}</p> */}
-                </td>
-                <td className="border-b border-[#eee] px-4 py-4 pl-8  dark:border-strokedark xl:pl-11">
-                  <p className="text-black dark:text-white">
-                    {parking.vehicle.typeVehicle}
-                  </p>
-                </td>
+    <>
+      <div className="my-2">
+        <h1 className="text-large py-2 font-medium text-slate-700 dark:text-slate-400">
+          Filtro de Parking
+        </h1>
+        <SearchBar />
+      </div>
+      <div className="rounded-sm border border-stroke bg-white px-4 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+        <div className="max-w-full overflow-auto ">
+          <table className="w-full table-auto">
+            <thead>
+              <tr className="bg-gray-2 text-left dark:bg-meta-4">
+                <th className="min-w-[40px] px-1 py-2 font-medium text-black dark:text-white xl:pl-11">
+                  ID
+                </th>
+                <th className="min-w-[80px] px-2 py-2 font-medium text-black dark:text-white xl:pl-11">
+                  Patente
+                </th>
+                <th className="min-w-[80px] px-2 py-2 font-medium text-black dark:text-white">
+                  Tipo de Vehiculo
+                </th>
+                <th className="min-w-[80px] px-2 py-2 font-medium text-black dark:text-white">
+                  Estado
+                </th>
+                <th className="min-w-[80px] px-2 py-2 font-medium text-black dark:text-white">
+                  Fecha Ingreso
+                </th>
 
-                <td className="border-b border-[#eee] px-4 py-4 pl-0 dark:border-strokedark">
-                  <p
-                    className={`inline-flex rounded-full bg-opacity-10 px-3 py-1 text-sm font-medium 
+                <th className="min-w-[80px] px-2 py-2 font-medium text-black dark:text-white">
+                  Fecha Salida
+                </th>
+                <th className="min-w-[60px] px-2 py-2 font-medium text-black dark:text-white">
+                  Horas
+                </th>
+                <th className="min-w-[80px] px-2 py-2 font-medium text-black dark:text-white">
+                  Costo Total
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {parkings.length &&
+                parkings.map((parking) => (
+                  <tr key={parking.id}>
+                    <td className="border-b border-[#eee] px-1 py-4  dark:border-strokedark xl:pl-11">
+                      <h5 className="font-medium text-black dark:text-white">
+                        {parking.id}
+                      </h5>
+                      {/**  <p className="text-sm">${packageItem.price}</p> */}
+                    </td>
+                    <td className="border-b border-[#eee] px-2 py-4 pl-5 dark:border-strokedark xl:pl-11">
+                      <h5 className="font-medium text-black dark:text-white">
+                        {parking.vehicle.licencePlate}
+                      </h5>
+                      {/**  <p className="text-sm">${packageItem.price}</p> */}
+                    </td>
+                    <td className="border-b border-[#eee] px-4 py-4 pl-8  dark:border-strokedark xl:pl-11">
+                      <p className="text-black dark:text-white">
+                        {parking.vehicle.typeVehicle}
+                      </p>
+                    </td>
+
+                    <td className="border-b border-[#eee] px-4 py-4 pl-0 dark:border-strokedark">
+                      <p
+                        className={`inline-flex rounded-full bg-opacity-10 px-3 py-1 text-sm font-medium 
                       ${
                         parking.status === VehicleStatus.COMPLETED
                           ? "bg-success text-success"
                           : "bg-warning text-warning"
                       }`}
-                  >
-                    {parking.status === VehicleStatus.COMPLETED
-                      ? "Finalizado"
-                      : "En proceso"}
-                  </p>
-                </td>
+                      >
+                        {parking.status === VehicleStatus.COMPLETED
+                          ? "Finalizado"
+                          : "En proceso"}
+                      </p>
+                    </td>
+                    <td className="border-b border-[#eee] px-2 py-4 dark:border-strokedark">
+                      <p className="text-black dark:text-white">
+                        {parking.entryTime}
+                      </p>
+                    </td>
 
-                <td className="border-b border-[#eee] px-2 py-4 dark:border-strokedark">
-                  <p className="text-black dark:text-white">
-                    {parking.entryTime}
-                  </p>
-                </td>
-                <td className="border-b border-[#eee] px-2 py-4 dark:border-strokedark">
-                  <p className="text-black dark:text-white">
-                    {parking.exitTime}
-                  </p>
-                </td>
-                <td className=" border-b border-[#eee] px-2  py-4  text-center dark:border-strokedark">
-                  <p className="text-black dark:text-white">{parking.hours}</p>
-                </td>
+                    <td className="border-b border-[#eee] px-2 py-4 dark:border-strokedark">
+                      <p className="text-black dark:text-white">
+                        {parking.exitTime}
+                      </p>
+                    </td>
+                    <td className=" border-b border-[#eee] px-2  py-4  text-center dark:border-strokedark">
+                      <p className="text-black dark:text-white">
+                        {parking.hours}
+                      </p>
+                    </td>
 
-                <td className="border-b border-[#eee] px-2  py-4 dark:border-strokedark xl:pr-5">
-                  <p className="text-black dark:text-white">
-                    {new Intl.NumberFormat("es-AR", {
-                      style: "currency",
-                      currency: "ARS",
-                    }).format(parking.cost)}
-                  </p>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                    <td className="border-b border-[#eee] px-2  py-4 dark:border-strokedark xl:pr-5">
+                      <p className="text-black dark:text-white">
+                        {new Intl.NumberFormat("es-AR", {
+                          style: "currency",
+                          currency: "ARS",
+                        }).format(parking.cost)}
+                      </p>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

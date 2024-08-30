@@ -2,7 +2,7 @@
 import React, { useState, ReactNode } from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import ParkingProvider from "@/context/ParkingContext";
+import ParkingProvider from "@/context/parking/ParkingProvider";
 export default function DefaultLayout({
   children,
 }: {

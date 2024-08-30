@@ -1,10 +1,10 @@
 "use client";
 
 import React, { createContext, ReactNode } from "react";
-import { ParkingContextType } from "@/interfaces/parkingContextType";
+import { ParkingContextType } from "@/interfaces/IParkingContextType";
 
 //======================HOOK==================================
-import { useHookParkingProvider } from "@/hooks/useHookParkingProvider";
+import HookParkingProvider from "@/context/parking/hookParkingProvider";
 //================================
 interface ParkingProvidersProps {
   children: ReactNode;
@@ -16,9 +16,9 @@ export const ParkingContext = createContext<ParkingContextType | undefined>(
 );
 
 const ParkingProvider: React.FC<ParkingProvidersProps> = ({ children }) => {
-  const { parkings, loading } = useHookParkingProvider();
+  const { parkings, loading, searchParking } = HookParkingProvider();
   return (
-    <ParkingContext.Provider value={{ parkings, loading }}>
+    <ParkingContext.Provider value={{ parkings, loading, searchParking }}>
       {children}
     </ParkingContext.Provider>
   );
