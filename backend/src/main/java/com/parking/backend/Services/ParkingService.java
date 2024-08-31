@@ -65,7 +65,9 @@ public class ParkingService {
     ///me devuelve todos los parking por la licencia
     @Transactional
     public List<Parking> getParkingByLicencePlate(String licencePlate) {
+
         try {
+             System.out.println("back:"+ licencePlate);
             String formatterLicencePlate=licencePlate.trim().toUpperCase();
           //  System.out.println("patente qe ingresa es "+ formatterLicencePlate);
             return parkingRepository.findByVehicleLicencePlate(formatterLicencePlate);
@@ -127,7 +129,7 @@ public class ParkingService {
             throw e;
         }
         catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
 
     }

@@ -2,7 +2,7 @@ package com.parking.backend.Enum;
 
 public enum COLOR {
 
-
+        UNKNOW("Desconocido"),
         RED("Rojo"),
         BLUE("Azul"),
         GREEN("Verde"),
@@ -24,6 +24,7 @@ public enum COLOR {
         NAVY("Azul marino"),
         OLIVE("Oliva"),
         LIME("Lima");
+     
 
         private final String description;
 

@@ -18,7 +18,7 @@ const ToastMessage: React.FC<ToastMessageProps> = ({
     const timer = setTimeout(() => {
       setVisible(false);
       onClose(); // Llama a la función de cierre cuando el mensaje se oculta
-    }, 5000); // Muestra el mensaje por 5 segundos
+    }, 3000); // Muestra el mensaje por 4 segundos
 
     return () => clearTimeout(timer); // Limpia el temporizador si el componente se desmonta
   }, [onClose]);

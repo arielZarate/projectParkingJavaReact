@@ -16,9 +16,29 @@ export const ParkingContext = createContext<ParkingContextType | undefined>(
 );
 
 const ParkingProvider: React.FC<ParkingProvidersProps> = ({ children }) => {
-  const { parkings, loading, searchParking } = HookParkingProvider();
+  const {
+    parkings,
+    loading,
+    searchParking,
+    typeVehicle,
+    setTypeVehicle,
+    status,
+    setStatus,
+    resetFilter,
+  } = HookParkingProvider();
   return (
-    <ParkingContext.Provider value={{ parkings, loading, searchParking }}>
+    <ParkingContext.Provider
+      value={{
+        parkings,
+        loading,
+        searchParking,
+        typeVehicle,
+        setTypeVehicle,
+        status,
+        setStatus,
+        resetFilter,
+      }}
+    >
       {children}
     </ParkingContext.Provider>
   );

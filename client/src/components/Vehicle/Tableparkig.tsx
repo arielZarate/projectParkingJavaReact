@@ -3,29 +3,56 @@ import useHookParkingContext from "@/context/parking/useHookParkingContext";
 import STATUS_VEHICLE from "@/enum/statusVehicle";
 import Loader from "../common/Loader";
 import SearchBar from "../Filter/SearBar";
-
 import SelectTypeVehicle from "../Filter/SelectTypeVehicle";
-import SelectGroupOne from "../Z-components/SelectGroup/SelectGroupOne";
-import SelectGroupTwo from "../Z-components/SelectGroup/SelectGroupTwo";
 import SelectStatusVehicle from "../Filter/SelectStatusVehicle";
+//import useToast from "../ToastMessage/useToast";
 
 const TableParking: React.FC = () => {
-  const { parkings, loading } = useHookParkingContext();
+  const { parkings, loading, resetFilter } = useHookParkingContext();
+  //const { setToast, toast, ToastMessage, handleCloseToast } = useToast();
 
   //UTILIZE EL MISMO LOADER DEL LAYOUT ,parece redundante pero aydua en la UX
   if (loading) {
     return <Loader />;
   }
+
+  /*
+  
+  if (parkings.length > 0) {
+    setToast({
+      message: "Parkings obtenidos",
+      type: "success",
+    });
+  }
+
+  {toast && (
+    <ToastMessage
+      message="Se han cargado los parkings"
+      type="success"
+      onClose={handleCloseToast}
+    />
+  )}
+  */
   return (
     <>
       <div className="my-2">
         <h1 className="py-2 text-xl font-medium text-slate-700 dark:text-slate-400">
           Filtro de Parking
         </h1>
-        <div className="flex flex-col  gap-3 md:flex-row">
+        <div className="flex flex-col gap-2 xl:flex-row">
           <SearchBar />
           <SelectTypeVehicle />
           <SelectStatusVehicle />
+
+          <div className="relative mb-12 pb-7">
+            <button
+              className=" absolute w-32  translate-x-0 appearance-none rounded-md border border-stroke bg-gray px-1  py-3 font-medium text-primary outline-none transition hover:border-primary dark:border-form-strokedark  dark:bg-slate-500 dark:bg-transparent dark:text-white dark:hover:border-primary 
+             dark:focus:border-primary md:top-6 md:w-32 md:translate-x-0 lg:translate-x-0 xl:translate-x-10 "
+              onClick={resetFilter}
+            >
+              Borrar filtros
+            </button>
+          </div>
         </div>
       </div>
       <div className="rounded-sm border border-stroke bg-white px-4 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -61,68 +88,67 @@ const TableParking: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {parkings &&
-                parkings.map((parking) => (
-                  <tr key={parking.id}>
-                    <td className="border-b border-[#eee] px-1 py-4  dark:border-strokedark xl:pl-11">
-                      <h5 className="font-medium text-black dark:text-white">
-                        {parking.id}
-                      </h5>
-                      {/**  <p className="text-sm">${packageItem.price}</p> */}
-                    </td>
-                    <td className="border-b border-[#eee] px-2 py-4 pl-5 dark:border-strokedark xl:pl-11">
-                      <h5 className="font-medium text-black dark:text-white">
-                        {parking.vehicle.licencePlate}
-                      </h5>
-                      {/**  <p className="text-sm">${packageItem.price}</p> */}
-                    </td>
-                    <td className="border-b border-[#eee] px-4 py-4 pl-8  dark:border-strokedark xl:pl-11">
-                      <p className="text-black dark:text-white">
-                        {parking.vehicle.typeVehicle}
-                      </p>
-                    </td>
+              {parkings?.map((parking) => (
+                <tr key={parking.id}>
+                  <td className="border-b border-[#eee] px-1 py-4  dark:border-strokedark xl:pl-11">
+                    <h5 className="font-medium text-black dark:text-white">
+                      {parking.id}
+                    </h5>
+                    {/**  <p className="text-sm">${packageItem.price}</p> */}
+                  </td>
+                  <td className="border-b border-[#eee] px-2 py-4 pl-5 dark:border-strokedark xl:pl-11">
+                    <h5 className="font-medium text-black dark:text-white">
+                      {parking.vehicle.licencePlate}
+                    </h5>
+                    {/**  <p className="text-sm">${packageItem.price}</p> */}
+                  </td>
+                  <td className="border-b border-[#eee] px-4 py-4 pl-8  dark:border-strokedark xl:pl-11">
+                    <p className="text-black dark:text-white">
+                      {parking.vehicle.typeVehicle}
+                    </p>
+                  </td>
 
-                    <td className="border-b border-[#eee] px-4 py-4 pl-0 dark:border-strokedark">
-                      <p
-                        className={`inline-flex rounded-full bg-opacity-10 px-3 py-1 text-sm font-medium 
+                  <td className="border-b border-[#eee] px-4 py-4 pl-0 dark:border-strokedark">
+                    <p
+                      className={`inline-flex rounded-full bg-opacity-10 px-3 py-1 text-sm font-medium 
                       ${
                         parking.status === STATUS_VEHICLE.COMPLETED
                           ? "bg-success text-success"
                           : "bg-warning text-warning"
                       }`}
-                      >
-                        {parking.status === STATUS_VEHICLE.COMPLETED
-                          ? "Finalizado"
-                          : "En proceso"}
-                      </p>
-                    </td>
-                    <td className="border-b border-[#eee] px-2 py-4 dark:border-strokedark">
-                      <p className="text-black dark:text-white">
-                        {parking.entryTime}
-                      </p>
-                    </td>
+                    >
+                      {parking.status === STATUS_VEHICLE.COMPLETED
+                        ? "Finalizado"
+                        : "En proceso"}
+                    </p>
+                  </td>
+                  <td className="border-b border-[#eee] px-2 py-4 dark:border-strokedark">
+                    <p className="text-black dark:text-white">
+                      {parking.entryTime}
+                    </p>
+                  </td>
 
-                    <td className="border-b border-[#eee] px-2 py-4 dark:border-strokedark">
-                      <p className="text-black dark:text-white">
-                        {parking.exitTime}
-                      </p>
-                    </td>
-                    <td className=" border-b border-[#eee] px-2  py-4  text-center dark:border-strokedark">
-                      <p className="text-black dark:text-white">
-                        {parking.hours}
-                      </p>
-                    </td>
+                  <td className="border-b border-[#eee] px-2 py-4 dark:border-strokedark">
+                    <p className="text-black dark:text-white">
+                      {parking.exitTime}
+                    </p>
+                  </td>
+                  <td className=" border-b border-[#eee] px-2  py-4  text-center dark:border-strokedark">
+                    <p className="text-black dark:text-white">
+                      {parking.hours}
+                    </p>
+                  </td>
 
-                    <td className="border-b border-[#eee] px-2  py-4 dark:border-strokedark xl:pr-5">
-                      <p className="text-black dark:text-white">
-                        {new Intl.NumberFormat("es-AR", {
-                          style: "currency",
-                          currency: "ARS",
-                        }).format(parking.cost)}
-                      </p>
-                    </td>
-                  </tr>
-                ))}
+                  <td className="border-b border-[#eee] px-2  py-4 dark:border-strokedark xl:pr-5">
+                    <p className="text-black dark:text-white">
+                      {new Intl.NumberFormat("es-AR", {
+                        style: "currency",
+                        currency: "ARS",
+                      }).format(parking.cost)}
+                    </p>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

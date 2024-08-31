@@ -48,7 +48,7 @@ const ExitVehicleForm = () => {
 
       setTimeout(() => {
         router.push("/vehicle/table"); // Redirigir a la página deseada
-      }, 5000);
+      }, 3000);
     } catch (error) {
       handlerErrorToast(error, setToast);
     }
