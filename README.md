@@ -7,78 +7,92 @@ Proyecto creado para implementar un modelo de negocio de un sistema para gestion
 - Backend: java
 - FrontEnd: React
 
-## Estructura del Proyecto
 
-###### esta es la idea
+
+<div>
+
+<img src="./imgOfreadme/login.png"
+ alt="login" 
+ width="400px" height="250px"
+ />
+<img src="./imgOfreadme/dashboard.png" alt="dash"
+ width="400px" height="250px"
+/>
+
+
+</div>
+
+
+
+
+
+
+
+## Estructura del Proyecto
 
 1. Frontend (React)
 
    - Pages:
 
-     - Home: Información general del estacionamiento, con enlaces a las diferentes  
+     - Home: Dashboard con información general del estacionamiento, con enlaces a las diferentes  
         secciones.
-     - Users Management: Página para gestionar los usuarios registrados (propietarios de
-       vehículos).
-     - Vehicles Management: Página para gestionar los vehículos registrados.
-     - Parking Transactions: Página para gestionar las entradas y salidas de vehículos,
-       calcular tarifas y registrar pagos.
-     - Reports: Página para visualizar reportes (e.g., ingresos, ocupación del
+     - Listado de Parkings : pagina para listar todos los parkings. 
+     - Admin: Página para gestionar tarifas , creacion de nuevo empleado , reportes , administracion extra de parking.
+     - Ingreso de Parking: Página para gestionar las entradas de vehículos.
+      - Salida de Parking: Página para gestionar las salidas de vehículos.
+     - Configuracion: Página para gestionar la cuenta y visualizar perfil.
+     - Acerca: Página para mostrar informacion del software.
+     - Reportes: Página para visualizar reportes (e.g., ingresos, ocupación del
        estacionamiento).
+     - Contratos: Página para visualizar contratos de usuarios abonados (se vera su inplementacion).
 
-   - Components:
-
-     - Header: Barra de navegación con enlaces a las diferentes páginas.
-     - Footer: Información del contacto y derechos de autor.
-     - UserForm: Formulario para registrar o editar información de los usuarios.
-     - VehicleForm: Formulario para registrar o editar información de los vehículos.
-     - ParkingTransactionForm: Formulario para gestionar la entrada/salida de vehículos
-       y calcular tarifas.
-     - TransactionList: Lista para mostrar todas las transacciones realizadas en el  
-       estacionamiento.
-     - State Management: Puedes usar Context API o Redux para manejar el estado de la  
-       aplicación.
-
-     - UI Framework: Puedes utilizar Material-UI o Bootstrap para darle un estilo
-       moderno y consistente a tu aplicación.
 
 2. Backend (Spring Boot)
 
    - Entities:
 
-     - User: Representa a los propietarios de los vehículos.
+     - Members: Representa a los propietarios de los vehículos.
+      - Employee: Representa a los empleoados del sistema. 
      - Vehicle: Representa los vehículos estacionados.
-     - ParkingTransaction: Registra las transacciones del estacionamiento,
+      - Rate: Representa los tarifas por tipo de vehiculo.
+     - Parking: Registra las transacciones del estacionamiento,
        incluyendo tiempo de entrada, tiempo de salida, tarifa calculada, etc.
 
    - Repositories:
 
-     - UserRepository: Para realizar operaciones CRUD sobre los usuarios.
+     - EmployeeRepository: Para realizar operaciones CRUD sobre los Employee.
      - VehicleRepository: Para realizar operaciones CRUD sobre los vehículos.
-     - ParkingTransactionRepository: Para registrar y gestionar las transacciones del
+     - ParkingRepository: Para registrar y gestionar las transacciones del
        estacionamiento.
+
+      - RateRepository: Para realizar operaciones CRUD de las tarifas.
 
    - Services:
 
-     - UserService: Lógica de negocio para la gestión de usuarios.
+     - EmployeeService: Lógica de negocio para la gestión de empleados.
      - VehicleService: Lógica de negocio para la gestión de vehículos.
-     - ParkingTransactionService: Lógica de negocio para manejar las transacciones y
-       calcular las tarifas.
+     - ParkingService: Lógica de negocio para manejar las transacciones.
+     - RateService: Lógica de negocio para manejar las transacciones.
 
    - Controllers:
 
-   - UserController: Endpoints para la gestión de usuarios.
-   - VehicleController: Endpoints para la gestión de vehículos.
-   - ParkingTransactionController: Endpoints para gestionar las transacciones de  
+     - EmployeeController: Endpoints para la gestión de usuarios.
+     - VehicleController: Endpoints para la gestión de vehículos.
+    - ParkingController: Endpoints para gestionar las transacciones de  
      estacionamiento.
+    - RateController: ndpoints para la gestión de tarifas.
 
    - Security:
    - Implementa Spring Security para manejar la autenticación y autorización, protegiendo
-     así las rutas según los roles de usuario (e.g., admin, user).
+     así las rutas según los roles de usuario (e.g., admin, user) y en el front con NextAuth.
 
-- Calculo de Tarifas:
-
-  Puedes calcular las tarifas basándote en el tiempo de entrada y salida de los vehículos. Las tarifas pueden depender del tipo de vehículo o del tiempo de permanencia.
 
 - Reportes y Estadísticas:
 
-  Implementa reportes que muestren las estadísticas de ocupación y los ingresos del estacionamiento. Puedes hacer esto mediante consultas SQL personalizadas o utilizando las capacidades de JPA.
+  Implementa reportes que muestren las estadísticas de ocupación y los ingresos del estacionamiento. Puedes hacer esto mediante consultas SQL personalizadas o utilizando las capacidades de JPA.(no se si se implementara)
+
+
+## Reportes de google
+
+
+![image](./imgOfreadme/reporte%20de%20rendimiento.png)

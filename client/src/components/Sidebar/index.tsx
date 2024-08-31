@@ -67,17 +67,22 @@ const menuGroups = [
       {
         icon: <FaFileContract size={18} />,
         label: "Contratos",
-        route: "/contract",
+        route: "#",
+        children: [
+          { label: "Ver Contratos", route: "/contract" },
+          { label: "Nuevo Contrato", route: "/contract" },
+        ],
       },
 
-      /*
       {
-        icon: <FaUserShield size={18} />,
-        label: "Administrador",
+        icon: <FaChartPie size={18} color="white" />,
+        label: "Reportes",
         route: "#",
-        children: [{ label: "eCommerce", route: "/" }],
+        children: [
+          { label: "Ver Reportes", route: "/chart" },
+          { label: "Generar Reportes", route: "/chart" },
+        ],
       },
-    */
 
       {
         icon: <IoSettings size={18} />,
@@ -87,18 +92,6 @@ const menuGroups = [
           { label: "Perfil", route: "/profile" },
           { label: "Cuenta", route: "/settings" },
         ],
-      },
-
-      {
-        icon: <FaChartPie size={18} color="white" />,
-        label: "Reportes",
-        route: "/chart",
-      },
-
-      {
-        icon: <MdLogin size={20} color="white" />,
-        label: "Salir",
-        route: "/",
       },
     ],
   },
@@ -122,9 +115,16 @@ const menuGroups = [
         label: "Administrador",
         route: "#",
         children: [
-          { label: "Iniciar Sesion", route: "/auth/signin" },
-          { label: "Registro", route: "/auth/signup" },
+          { label: "Gestionar Tarifas", route: "#" },
+          //una tabla para gestionar empleados
+          { label: "Gestionar Empleados", route: "/auth/signup" },
+          { label: "Gestionar Parkings", route: "#" },
         ],
+      },
+      {
+        icon: <MdLogin size={20} color="white" />,
+        label: "Salir",
+        route: "/",
       },
     ],
   },
@@ -138,7 +138,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <ClickOutside onClick={() => setSidebarOpen(false)}>
       <aside
-        className={`overflow-y-hidde fixed left-0 top-0 z-9999 flex h-screen w-72.5 flex-col bg-sidebarBgSky duration-300 ease-linear dark:bg-SidebarDark lg:translate-x-0 ${
+        className={`overflow-y-hidde fixed left-0 top-0 z-9999 flex max-h-max w-72.5 flex-col bg-sidebarBgSky duration-300 ease-linear dark:bg-SidebarDark lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -150,7 +150,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               width={"140"}
               height={"30"}
               alt="Logo"
-              priority
+              loading="lazy"
               className="object-contain object-center"
             />
           </Link>

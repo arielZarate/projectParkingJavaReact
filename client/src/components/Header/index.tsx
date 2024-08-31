@@ -4,10 +4,10 @@ import DarkModeSwitcher from "./DarkModeSwitcher";
 //import DropdownNotification from "./DropdownNotification";
 import DropdownUser from "./DropdownUser";
 import Image from "next/image";
-import { FaSearch } from "react-icons/fa";
+
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
-  setSidebarOpen: (arg0: boolean) => void;
+  setSidebarOpen: (arg: boolean) => void;
 }) => {
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
@@ -62,6 +62,7 @@ const Header = (props: {
               height={32}
               src={"/images/logo/logo.svg"}
               alt="Logo"
+              loading="lazy"
               className="h-8 w-8 object-contain"
             />
           </Link>

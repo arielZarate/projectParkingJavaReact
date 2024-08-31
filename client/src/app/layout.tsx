@@ -1,7 +1,7 @@
 "use client";
 import "@/css/satoshi.css";
 import "@/css/style.css";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
 
 function RootLayout({
@@ -9,13 +9,12 @@ function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  // const pathname = usePathname();
+  const [loading, setloading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
+    setTimeout(() => {
+      setloading(false);
+    }, 777);
   }, []);
 
   //========================ROOT LAYOUT========================================
@@ -24,6 +23,8 @@ function RootLayout({
       <body suppressHydrationWarning={true}>
         <div className="min-w-max dark:bg-boxdark-2 dark:text-bodydark">
           {loading ? <Loader /> : children}
+
+          {/** <Suspense>{children}</Suspense> */}
         </div>
       </body>
     </html>
