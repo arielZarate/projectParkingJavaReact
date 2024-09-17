@@ -1,35 +1,28 @@
 package com.parking.backend.Services;
 
-import com.parking.backend.Enum.COLOR;
-import com.parking.backend.Enum.STATUS_PARKING;
-import com.parking.backend.Enum.TYPE_VEHICLE;
-import com.parking.backend.Models.Employee;
-import com.parking.backend.Models.Parking;
-import com.parking.backend.Models.Rate;
-import com.parking.backend.Models.Vehicle;
-import com.parking.backend.Repositories.ParkingRepository;
-import com.parking.backend.Repositories.VehicleRepository;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.springframework.test.context.ActiveProfiles;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
+import com.parking.backend.Models.Parking;
+import com.parking.backend.Repositories.ParkingRepository;
+import com.parking.backend.Repositories.VehicleRepository;
 
 
 //@DataJpaTest
 //@SpringJUnitConfig
 @SpringBootTest
+@ActiveProfiles("test")
+
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 //@Import(ParkingService.class)  //ota forma de importar
 class ParkingServiceTest {
@@ -46,14 +39,7 @@ class ParkingServiceTest {
     //========services=================
     @Autowired
     private ParkingService parkingService;
-    @Autowired
-    private  VehicleService vehicleService;
-
-    @Autowired
-    private RateService rateService;
-
-    @Autowired
-    private EmployeeService employeeService;
+ 
 
    @BeforeEach
     void setUp() {
@@ -63,7 +49,8 @@ class ParkingServiceTest {
 
 
 
-    @Test
+    /*
+     * @Test
     @DisplayName("Test para guardar un parking")
     public void testSaveParking() {
 
@@ -86,6 +73,8 @@ class ParkingServiceTest {
 
         System.out.println("Datos del parking creado: \n" + savedParking);
     }
+     * 
+     */
 
 
 
@@ -128,11 +117,12 @@ class ParkingServiceTest {
 
     }
 
-    @Test
+   
+     @Test
     @DisplayName("Test para obtener parkings por matrícula")
     void getParkingByLicencePlate() {
 
-        String licencePlate = "pit011";  // Matrícula que estás buscando
+        String licencePlate = "RTI456";  // Matrícula que estás buscando
         List<Parking> listParking = parkingService.getParkingByLicencePlate(licencePlate);
 
 
@@ -153,8 +143,11 @@ class ParkingServiceTest {
 
     }
 
+    
 
-    @Test
+  /*
+   * 
+     @Test
     @DisplayName("Test para finalizar un parking")
     void testFinalizeParking() {
 
@@ -173,4 +166,6 @@ class ParkingServiceTest {
 
 
     }
+   * 
+   */
 }

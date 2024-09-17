@@ -1,9 +1,10 @@
 package com.parking.backend.Services;
 
-import com.parking.backend.Enum.TYPE_VEHICLE;
-import com.parking.backend.Models.Rate;
-import com.parking.backend.Repositories.RateRepository;
-import org.apache.catalina.filters.RemoteIpFilter;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,10 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import com.parking.backend.Enum.TYPE_VEHICLE;
+import com.parking.backend.Models.Rate;
+import com.parking.backend.Repositories.RateRepository;
 
 
 @SpringBootTest
@@ -65,11 +65,11 @@ class RateServiceTest {
     void testCreateOrUpdateRateList() {
         Rate rate1 = new Rate();
         rate1.setTypeVehicle(TYPE_VEHICLE.CAR);
-        rate1.setCostPerHour(20.0);
+        rate1.setCostPerHour(50.0);
 
         Rate rate2 = new Rate();
         rate2.setTypeVehicle(TYPE_VEHICLE.BICYCLE);
-        rate2.setCostPerHour(10.0);
+        rate2.setCostPerHour(20.0);
 
         ArrayList<Rate> rates = new ArrayList<>();
         rates.add(rate1);
